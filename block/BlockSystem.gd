@@ -19,16 +19,16 @@ var skinwidth = 20
 var sleeping_blocks = []
 var travelling_blocks = []
 
-var players = []
 
 var block_cl = Block.get_exclusive_collision_layer()
 
 func _ready():
 	call_deferred("register_all_blocks")
-	players = get_tree().get_nodes_in_group("players")
 
 
 func _physics_process(delta):
+	
+
 	for block in travelling_blocks:
 		
 		# interpolator to transition from the low friction area to the hig friction one
@@ -57,9 +57,6 @@ func _physics_process(delta):
 func experimental_collision(block: Block, delta) -> bool:
 	var space_rid = get_world_2d().space
 	var space_state = Physics2DServer.space_get_direct_state(space_rid)
-	
-	var ignore = players.duplicate()
-	ignore.append(block)
 	# use global coordinates, not local to node
 	
 	var center = block.global_position + Vector2(0, - skinwidth + block.size.x) +\
@@ -67,7 +64,6 @@ func experimental_collision(block: Block, delta) -> bool:
 	var shift = Vector2( 0 , - block.size.x + skinwidth)
 	var intensity = Vector2 ( delta + skinwidth, 0);
 
-	
 	var result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
 	if(!result.empty()):
 		var p = result.position
@@ -92,13 +88,11 @@ func experimental_collision(block: Block, delta) -> bool:
 		return true
 	return false
 	
+	
 func experimental_collision_v(block: Block, delta) -> bool:
 	var space_rid = get_world_2d().space
 	var space_state = Physics2DServer.space_get_direct_state(space_rid)
 	# use global coordinates, not local to node
-	
-	var ignore = players.duplicate()
-	ignore.append(block)
 	
 	var center = block.global_position + Vector2(- block.size.y + skinwidth, 0) +\
 				 Vector2( 0, block.size.y - skinwidth) * sign(delta)
@@ -158,55 +152,6 @@ func set_block_as_sleeping(block : Block):
 	sleeping_blocks.append(block)
 	
 	
-func must_freeze_block(block : Block) -> bool:
-	for body in block.vert_collider.get_overlapping_bodies():
-		if body.is_in_group("ground"):
-			return true
-	
-	for area in block.vert_collider.get_overlapping_areas():
-		var other = area.get_parent().get_parent()
-		if !(other is Block):
-			continue
-			
-		if other.position.y < block.position.y:
-			continue
-			
-		if !(other in sleeping_blocks):
-			continue
-			
-		var diff = other.global_position - block.global_position
-		if block.cur_velocity.dot(diff) > 0:
-			snap_block_to_block(block, other, SNAP_VERTICALLY)
-			return true
-	
-	return false  
-	
 
-
-func block_colliding_horizontally(block : Block) -> bool:
-	for area in block.horiz_collider.get_overlapping_areas():
-		var other = area.get_parent().get_parent()
-		if !(other is Block):
-			continue
-			
-		if other == block:
-			continue
-		
-		snap_block_to_block(block, other, SNAP_HORIZONTALLY)
-		return true
-		
-	return false
-	
-	
-func snap_block_to_block(to_snap : Block, pivot : Block, snap_mode : int):
-	if snap_mode & SNAP_VERTICALLY:
-		var sgn = -1 if pivot.global_position.y > to_snap.global_position.y else 1
-		to_snap.global_position.y = pivot.global_position.y + sgn * 2 * pivot.size.y
-
-	if snap_mode & SNAP_HORIZONTALLY:
-		var sgn = -1 if pivot.global_position.x > to_snap.global_position.x else 1
-		to_snap.global_position.x = pivot.global_position.x + sgn * 2 * pivot.size.x
-		
-		
 func is_sleeping(block : Block) -> bool:
 	return block in sleeping_blocks
