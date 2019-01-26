@@ -42,7 +42,7 @@ func spawn_cloud_at_random_pos():
 	
 	
 func calc_fade_color() -> Color:
-	var a = lerp(0.5, 1, 1.0 * clouds.size() / N_CLOUDS)
+	var a = lerp(0.6, 1, 1.0 * clouds.size() / N_CLOUDS)
 	return Color(a, a, min(1, a*1.1), 1)
 		
 	
