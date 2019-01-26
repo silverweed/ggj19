@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/lift.ogg-f685c172e3157a9bf5b7b0dc6b3c9597.oggstr"
+
+[deps]
+
+source_file="res://player/sounds/lift.ogg"
+dest_files=[ "res://.import/lift.ogg-f685c172e3157a9bf5b7b0dc6b3c9597.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

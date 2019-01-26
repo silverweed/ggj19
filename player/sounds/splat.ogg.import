@@ -11,5 +11,9 @@ dest_files=[ "res://.import/splat.ogg-fcc4924f9d52b8d691097133c1779f96.oggstr" ]
 
 [params]
 
+<<<<<<< HEAD
 loop=true
+=======
+loop=false
+>>>>>>> implemented sounds (in a very dirty way)
 loop_offset=0

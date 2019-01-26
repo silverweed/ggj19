@@ -35,8 +35,10 @@ func _input(event):
 			carried_block.disable_main_collider_for(BLOCK_CLD_DISABLE_TIME_AFTER_THROW)
 			carried_block.throw(calc_throw_vector())
 			carried_block = null
+			$Throw.play()
 		
 		elif grabbable_block:
+			$PickUp.play()
 			carried_block = grabbable_block
 			grabbable_block = null
 
