@@ -37,6 +37,43 @@ func throw(initial_velocity : Vector2):
 
 	emit_signal("thrown", self)
 	
+func _draw():
+	var center = Vector2(- size.y + 10, - size.y) +\
+				 Vector2( 0, size.y - 10)
+	var shift = Vector2(+ size.y - 10, 0)
+	var intensity = Vector2 ( 0, 100);
+	
+	draw_line( center, center + intensity, Color.red)
+	center += 2 * shift
+	
+	draw_line( center, center + intensity, Color.red)
+
+	
+
+func experimental_collision() -> bool:
+	var space_rid = get_world_2d().space
+	var space_state = Physics2DServer.space_get_direct_state(space_rid)
+	# use global coordinates, not local to node
+	
+	var center = global_position + Vector2(0.5 * size.x - 0.1, 0) * sign(cur_velocity.x)
+	var shift = Vector2( 0 , - size.x / 2)
+	var intensity = Vector2 ( 0 , cur_velocity.x + 0.1);
+	
+	var result0 = space_state.intersect_ray(center, center + intensity , [self])
+	center += shift;
+	var result1 = space_state.intersect_ray(center, center + intensity, [self])
+	center += shift;
+	var result2 = space_state.intersect_ray(center, center + intensity, [self])
+	
+	if(!result1.empty()):
+		var p = result1.position
+		var sgn = -1 if p.x > global_position.x else 1
+		global_position.x = p.x + sgn * size.x
+		return true
+	
+	
+	return false
+	
 	
 func can_be_grabbed() -> bool:
 	for area in vert_collider.get_overlapping_areas():

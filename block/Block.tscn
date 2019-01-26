@@ -9,11 +9,11 @@ extents = Vector2( 60, 60 )
 
 [sub_resource type="RectangleShape2D" id=2]
 
-extents = Vector2( 63, 45 )
+extents = Vector2( 63, 30 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
-extents = Vector2( 45, 63 )
+extents = Vector2( 30, 63 )
 
 [sub_resource type="Animation" id=4]
 
@@ -43,16 +43,13 @@ script = ExtResource( 1 )
 position = Vector2( 0, 53.1431 )
 scale = Vector2( 1.88572, 1.88572 )
 texture = ExtResource( 2 )
-offset = Vector2( 0, -60 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 64, 64 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, -60 )
 shape = SubResource( 1 )
 
 [node name="Colliders" type="Node2D" parent="."]
-position = Vector2( 0, -60 )
 
 [node name="HorizCollider" type="Area2D" parent="Colliders"]
 collision_layer = 2048

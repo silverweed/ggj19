@@ -1,6 +1,7 @@
-extends Node
+extends CanvasItem
 
 const Block = preload("res://block/Block.gd")
+signal blocks_collided
 
 const SNAP_HORIZONTALLY = 1
 const SNAP_VERTICALLY = 1 << 1
@@ -11,11 +12,16 @@ var gravity = Vector2(0, 25000)
 var transient = 1
 var damping = 0.8
 
+var skinwidth = 20
+
 var sleeping_blocks = []
 var travelling_blocks = []
 
+var players = []
+
 func _ready():
 	call_deferred("register_all_blocks")
+	players = get_tree().get_nodes_in_group("players")
 
 
 func _physics_process(delta):
@@ -28,18 +34,96 @@ func _physics_process(delta):
 							block.cur_velocity * delta + \
 							0.5 * gravity * delta * delta
 		var new_velocity = block.cur_velocity + Vector2 (0, lerp(0, gravity.y, interpolant) * delta)
-		
 		new_velocity *= lerp(1, damping, interpolant)
 		
 		block.throw_time += delta
-		block.position = new_position
 		block.cur_velocity = new_velocity
 		
-		if must_freeze_block(block):
+		var delta_pos = new_position - block.position; 
+
+		block.position.x += delta_pos.x
+		
+		if experimental_collision(block, delta_pos.x): #block_colliding_horizontally(block):
+			block.cur_velocity.x = 0
+
+		block.position.y += delta_pos.y
+		if experimental_collision_v(block, delta_pos.y):
 			set_block_as_sleeping(block)
 		
-		if block_colliding_horizontally(block):
-			block.cur_velocity.x = 0
+func experimental_collision(block: Block, delta) -> bool:
+	var space_rid = get_world_2d().space
+	var space_state = Physics2DServer.space_get_direct_state(space_rid)
+	
+	var ignore = players.duplicate()
+	ignore.append(block)
+	# use global coordinates, not local to node
+	
+	var center = block.global_position + Vector2(0, - skinwidth + block.size.x) +\
+				 Vector2( block.size.x - skinwidth, 0) * sign(block.cur_velocity.x)
+	var shift = Vector2( 0 , - block.size.x + skinwidth)
+	var intensity = Vector2 ( delta + skinwidth, 0);
+	
+	var result = space_state.intersect_ray(center, center + intensity ,ignore)
+	if(!result.empty()):
+		var p = result.position
+		var sgn = -1 if p.x > block.global_position.x else 1
+		block.global_position.x = p.x + sgn * block.size.x
+		return true
+		
+	center += shift
+	result = space_state.intersect_ray(center, center + intensity, ignore)
+	if(!result.empty()):
+		var p = result.position
+		var sgn = -1 if p.x > block.global_position.x else 1
+		block.global_position.x = p.x + sgn * block.size.x
+		return true
+		
+	center += shift
+	result = space_state.intersect_ray(center, center + intensity, ignore)
+	if(!result.empty()):
+		var p = result.position
+		var sgn = -1 if p.x > block.global_position.x else 1
+		block.global_position.x = p.x + sgn * block.size.x
+		return true
+	return false
+	
+func experimental_collision_v(block: Block, delta) -> bool:
+	var space_rid = get_world_2d().space
+	var space_state = Physics2DServer.space_get_direct_state(space_rid)
+	# use global coordinates, not local to node
+	
+	var ignore = players.duplicate()
+	ignore.append(block)
+	
+	var center = block.global_position + Vector2(- block.size.y + skinwidth, 0) +\
+				 Vector2( 0, block.size.y - skinwidth) * sign(delta)
+	var shift = Vector2(+ block.size.y - skinwidth, 0)
+	var intensity = Vector2 (0, delta + skinwidth);
+	
+	var result = space_state.intersect_ray(center, center + intensity , players)
+	if(!result.empty()):
+		var p = result.position
+		var sgn = -1 if p.y > block.global_position.y else 1
+		block.global_position.y = p.y + sgn * block.size.y
+		return true
+		
+	center += shift
+	result = space_state.intersect_ray(center, center + intensity, players)
+	if(!result.empty()):
+		var p = result.position
+		var sgn = -1 if p.y > block.global_position.y else 1
+		block.global_position.y = p.y + sgn * block.size.y
+		return true
+		
+	center += shift
+	result = space_state.intersect_ray(center, center + intensity, players)
+	if(!result.empty()):
+		var p = result.position
+		var sgn = -1 if p.y > block.global_position.y else 1
+		block.global_position.y = p.y + sgn * block.size.y
+		return true
+
+	return false
 
 
 func register_all_blocks():
@@ -92,6 +176,7 @@ func must_freeze_block(block : Block) -> bool:
 	
 	return false  
 	
+
 
 func block_colliding_horizontally(block : Block) -> bool:
 	for area in block.horiz_collider.get_overlapping_areas():
