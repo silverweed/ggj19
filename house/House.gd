@@ -6,7 +6,7 @@ export var id = 0
 
 const TEXTURES = [
 	preload("res://house/sprites/house_base_01.png"),
-	preload("res://house/sprites/house_base_02.png")
+	preload("res://house/sprites/house_cyclops.png")
 ]
 	
 func _ready():

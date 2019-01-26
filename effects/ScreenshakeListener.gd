@@ -12,6 +12,5 @@ func _ready():
 	block_system.connect("blocks_collided", self, "on_blocks_collided")
 	
 
-func on_blocks_collided():
-	print("blocks collided")
-	screenshake_system.screenshake(200, 0.2)
+func on_blocks_collided(direction : Vector2):
+	screenshake_system.screenshake(100, 0.2, direction.x != 0, direction.y != 0, 10, 10)

@@ -1,12 +1,9 @@
 extends CanvasItem
 
-signal blocks_collided
+signal blocks_collided(direction)
 
 const Block = preload("res://block/Block.gd")
 const Player = preload("res://player/Player.gd")
-
-const SNAP_HORIZONTALLY = 1
-const SNAP_VERTICALLY = 1 << 1
 
 export var floor_y = 0
 
@@ -54,74 +51,71 @@ func _physics_process(delta):
 		if experimental_collision_v(block, delta_pos.y):
 			set_block_as_sleeping(block)
 		
-func experimental_collision(block: Block, delta) -> bool:
-	var space_rid = get_world_2d().space
-	var space_state = Physics2DServer.space_get_direct_state(space_rid)
+func experimental_collision(block: Block, delta : float) -> bool:
 	# use global coordinates, not local to node
-	
 	var center = block.global_position + Vector2(0, - skinwidth + block.size.x) +\
 				 Vector2( block.size.x - skinwidth, 0) * sign(block.cur_velocity.x)
 	var shift = Vector2( 0 , - block.size.x + skinwidth)
-	var intensity = Vector2 ( delta + skinwidth, 0);
 
-	var result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
-	if(!result.empty()):
-		var p = result.position
-		var sgn = -1 if p.x > block.global_position.x else 1
-		block.global_position.x = p.x + sgn * block.size.x
+	if try_cast(delta, center, block, true):
 		return true
 		
-	center += shift
-	result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
-	if(!result.empty()):
-		var p = result.position
-		var sgn = -1 if p.x > block.global_position.x else 1
-		block.global_position.x = p.x + sgn * block.size.x
+	if try_cast(delta, center + shift, block, true):
 		return true
 		
-	center += shift
-	result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
-	if(!result.empty()):
-		var p = result.position
-		var sgn = -1 if p.x > block.global_position.x else 1
-		block.global_position.x = p.x + sgn * block.size.x
+	if try_cast(delta, center + 2 * shift, block, true):
 		return true
+	
 	return false
+
 	
-	
-func experimental_collision_v(block: Block, delta) -> bool:
-	var space_rid = get_world_2d().space
-	var space_state = Physics2DServer.space_get_direct_state(space_rid)
+func experimental_collision_v(block: Block, delta : float) -> bool:
 	# use global coordinates, not local to node
-	
 	var center = block.global_position + Vector2(- block.size.y + skinwidth, 0) +\
 				 Vector2( 0, block.size.y - skinwidth) * sign(delta)
 	var shift = Vector2(+ block.size.y - skinwidth, 0)
-	var intensity = Vector2 (0, delta + skinwidth);
 	
-	var result = space_state.intersect_ray(center, center + intensity , [block], block_cl)
-	if(!result.empty()):
-		var p = result.position
-		var sgn = -1 if p.y > block.global_position.y else 1
-		block.global_position.y = p.y + sgn * block.size.y
+	if try_cast(delta, center, block, false):
 		return true
 		
-	center += shift
-	result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
-	if(!result.empty()):
-		var p = result.position
-		var sgn = -1 if p.y > block.global_position.y else 1
-		block.global_position.y = p.y + sgn * block.size.y
+	if try_cast(delta, center + shift, block, false):
 		return true
 		
-	center += shift
-	result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
-	if(!result.empty()):
-		var p = result.position
-		var sgn = -1 if p.y > block.global_position.y else 1
-		block.global_position.y = p.y + sgn * block.size.y
+	if try_cast(delta, center + 2 * shift, block, false):
 		return true
 
+	return false
+	
+	
+func try_cast(delta : float, center : Vector2, block : Block, horiz : bool) -> bool:
+	var space_rid = get_world_2d().space
+	var space_state = Physics2DServer.space_get_direct_state(space_rid)
+	var intensity = Vector2(delta + skinwidth, 0) if horiz else Vector2(0, delta + skinwidth)
+	
+	var result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
+	if horiz:
+		return check_cast_x(result, block) 
+	else:
+		return check_cast_y(result, block)
+	
+func check_cast_x(result : Dictionary, block : Block) -> bool:
+	if !result.empty():
+		var p = result.position
+		var sgn = -1 if p.x > block.global_position.x else 1
+		block.global_position.x = p.x + sgn * block.size.x
+		emit_signal("blocks_collided", Vector2(1, 0))
+		return true
+		
+	return false
+
+func check_cast_y(result : Dictionary, block : Block) -> bool:
+	if !result.empty():
+		var p = result.position
+		var sgn = -1 if p.y > block.global_position.y else 1
+		block.global_position.y = p.y + sgn * block.size.y
+		emit_signal("blocks_collided", Vector2(0, 1))
+		return true
+		
 	return false
 
 
