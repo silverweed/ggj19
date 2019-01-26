@@ -9,23 +9,23 @@
 [ext_resource path="res://player/sprites/player_anim/player_idle0003.png" type="Texture" id=7]
 [ext_resource path="res://player/sprites/player_anim/player_grab0004.png" type="Texture" id=8]
 [ext_resource path="res://player/sprites/player_anim/player_grab0005.png" type="Texture" id=9]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0000.png" type="Texture" id=10]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0001.png" type="Texture" id=11]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0002.png" type="Texture" id=12]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0003.png" type="Texture" id=13]
-[ext_resource path="res://player/sprites/player_anim/player_walk0001.png" type="Texture" id=14]
-[ext_resource path="res://player/sprites/player_anim/player_walk0002.png" type="Texture" id=15]
-[ext_resource path="res://player/sprites/player_anim/player_walk0003.png" type="Texture" id=16]
-[ext_resource path="res://player/sprites/player_anim/player_walk0000.png" type="Texture" id=17]
-[ext_resource path="res://player/sprites/player_anim/player_grab0000.png" type="Texture" id=18]
-[ext_resource path="res://player/sprites/player_anim/player_grab0001.png" type="Texture" id=19]
-[ext_resource path="res://player/sprites/player_anim/player_grab0002.png" type="Texture" id=20]
-[ext_resource path="res://player/sprites/player_anim/player_grab0003.png" type="Texture" id=21]
-[ext_resource path="res://player/sprites/player_anim/player_jump0000.png" type="Texture" id=22]
-[ext_resource path="res://player/sprites/player_anim/player_jump0001.png" type="Texture" id=23]
-[ext_resource path="res://player/sprites/player_anim/player_jump0002.png" type="Texture" id=24]
-[ext_resource path="res://player/sprites/player_anim/player_jump0003.png" type="Texture" id=25]
-[ext_resource path="res://player/sprites/player_anim/player_jump0004.png" type="Texture" id=26]
+[ext_resource path="res://player/sprites/player_anim/player_jump0000.png" type="Texture" id=10]
+[ext_resource path="res://player/sprites/player_anim/player_jump0001.png" type="Texture" id=11]
+[ext_resource path="res://player/sprites/player_anim/player_jump0002.png" type="Texture" id=12]
+[ext_resource path="res://player/sprites/player_anim/player_jump0003.png" type="Texture" id=13]
+[ext_resource path="res://player/sprites/player_anim/player_jump0004.png" type="Texture" id=14]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0000.png" type="Texture" id=15]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0001.png" type="Texture" id=16]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0002.png" type="Texture" id=17]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0003.png" type="Texture" id=18]
+[ext_resource path="res://player/sprites/player_anim/player_walk0001.png" type="Texture" id=19]
+[ext_resource path="res://player/sprites/player_anim/player_walk0002.png" type="Texture" id=20]
+[ext_resource path="res://player/sprites/player_anim/player_walk0003.png" type="Texture" id=21]
+[ext_resource path="res://player/sprites/player_anim/player_walk0000.png" type="Texture" id=22]
+[ext_resource path="res://player/sprites/player_anim/player_grab0000.png" type="Texture" id=23]
+[ext_resource path="res://player/sprites/player_anim/player_grab0001.png" type="Texture" id=24]
+[ext_resource path="res://player/sprites/player_anim/player_grab0002.png" type="Texture" id=25]
+[ext_resource path="res://player/sprites/player_anim/player_grab0003.png" type="Texture" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -53,28 +53,30 @@ animations = [ {
 "name": "throw",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
+"loop": true,
+"name": "jump",
+"speed": 8.0
+}, {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
 "loop": true,
 "name": "walk_grab",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ) ],
 "loop": true,
 "name": "grab",
 "speed": 5.0
-}, {
-"frames": [ ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ) ],
-"loop": true,
-"name": "jump",
-"speed": 8.0
 } ]
 
-[node name="Player" type="KinematicBody2D"]
+[node name="Player" type="KinematicBody2D" groups=[
+"players",
+]]
 scale = Vector2( 0.7, 0.7 )
 script = ExtResource( 1 )
 
@@ -106,14 +108,13 @@ shape = SubResource( 3 )
 [node name="Splatter" parent="FX" instance=ExtResource( 3 )]
 position = Vector2( -0.462211, 0 )
 z_index = 1
-emitting = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="FX"]
 position = Vector2( 3.43654, -8.11673 )
 scale = Vector2( -2, 1.92323 )
 frames = SubResource( 4 )
 animation = "idle"
-frame = 3
+frame = 2
 playing = true
 
 [connection signal="body_entered" from="GrabBlockArea" to="GrabBlockArea" method="_on_GrabBlockArea_body_entered"]

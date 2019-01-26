@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://block/Block.gd" type="Script" id=1]
 [ext_resource path="res://block/sprites/block_standard.png" type="Texture" id=2]
@@ -15,9 +15,27 @@ extents = Vector2( 63, 45 )
 
 extents = Vector2( 45, 63 )
 
+[sub_resource type="Animation" id=4]
+
+resource_name = "idle"
+length = 7.0
+step = 1.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2, 3, 4, 5, 6, 7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 0, 0, 64, 64 ), Rect2( 64, 0, 64, 64 ), Rect2( 128, 0, 64, 64 ), Rect2( 192, 0, 64, 64 ), Rect2( 256, 0, 64, 64 ), Rect2( 320, 0, 64, 64 ), Rect2( 384, 0, 64, 64 ), Rect2( 448, 0, 64, 64 ) ]
+}
+
 [node name="Block" type="KinematicBody2D" groups=[
-"blocks",
 "hurting_player",
+"blocks",
 ]]
 script = ExtResource( 1 )
 
@@ -26,6 +44,8 @@ position = Vector2( 0, 53.1431 )
 scale = Vector2( 1.88572, 1.88572 )
 texture = ExtResource( 2 )
 offset = Vector2( 0, -60 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 64, 64 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -60 )
@@ -48,4 +68,8 @@ collision_mask = 4096
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/VertCollider"]
 shape = SubResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 10.0
+anims/idle = SubResource( 4 )
 
