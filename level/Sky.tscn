@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://level/sprites/sky.png" type="Texture" id=1]
+[ext_resource path="res://level/Sun.tscn" type="PackedScene" id=2]
+[ext_resource path="res://level/Clouds.gd" type="Script" id=3]
+
+[node name="Sky" type="Node2D"]
+
+[node name="Background" type="Sprite" parent="."]
+position = Vector2( 553.458, 263.483 )
+scale = Vector2( 1.57652, 1.48793 )
+texture = ExtResource( 1 )
+
+[node name="Sun" parent="." instance=ExtResource( 2 )]
+position = Vector2( 1225.77, -180.428 )
+
+[node name="Clouds" type="Position2D" parent="."]
+position = Vector2( 538.531, -364.572 )
+script = ExtResource( 3 )
+

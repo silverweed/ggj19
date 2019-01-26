@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://level/sprites/sun.png" type="Texture" id=1]
+[ext_resource path="res://level/Sun.gd" type="Script" id=2]
+[ext_resource path="res://level/sprites/rays.png" type="Texture" id=3]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "rotate_rays"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Rays:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 360.0 ]
+}
+
+[node name="Sun" type="Sprite"]
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="Rays" type="Sprite" parent="."]
+show_behind_parent = true
+rotation = 3.49055
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.02
+anims/rotate_rays = SubResource( 1 )
+

@@ -13,6 +13,14 @@ var prev_position = Vector2()
 var cur_velocity = Vector2()
 var throw_time = 0
 
+func _ready():
+	match randi() % 16:
+		0: $Sprite.texture = load("res://block/sprites/block_angry.png")
+		1: $Sprite.texture = load("res://block/sprites/block_annoyed.png")
+		2: $Sprite.texture = load("res://block/sprites/block_dummy.png")
+		
+	
+	
 func throw(initial_velocity : Vector2):
 	prev_position = position
 	cur_velocity = initial_velocity
