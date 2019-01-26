@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+signal player_dead(id)
+
 const Block = preload("res://block/Block.gd")
 
 const MAX_JUMPS = 1
@@ -23,6 +25,8 @@ var deceleration = 40
 var speed = 600
 var gravity = Vector2(0, NORMAL_GRAVITY)
 var prev_velocity = Vector2(1, 0)
+
+var safety_timer = 0
 
 onready var block_carrying = $GrabBlockArea
 onready var splatter_fx = $FX/Splatter
@@ -55,6 +59,8 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action_pressed("jump_" + str(id)):
 		jump()
+	if Input.is_action_pressed("suicide_" + str(id)):
+		die()
 
 
 
@@ -110,10 +116,12 @@ func _on_Hitbox_body_entered(body : PhysicsBody2D):
 	if diff.dot(body.cur_velocity) > 0:
 		die()
 		
+
 		
 func die():
 	splatter_fx.emitting = true
 	splatter_fx.restart()
+	emit_signal("player_dead", id)
 	
 		
 	
