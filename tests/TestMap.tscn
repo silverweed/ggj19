@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://level/Ground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://block/BlockSystem.tscn" type="PackedScene" id=2]
@@ -6,11 +6,14 @@
 [ext_resource path="res://level/LevelLayout.tscn" type="PackedScene" id=4]
 [ext_resource path="res://player/PlayerManager.tscn" type="PackedScene" id=5]
 [ext_resource path="res://level/Walls.tscn" type="PackedScene" id=6]
+[ext_resource path="res://effects/ScreenShakeSystem.tscn" type="PackedScene" id=7]
 
 [node name="TestMap" type="Node2D"]
 position = Vector2( 256, -14.3575 )
 
 [node name="Ground" parent="." instance=ExtResource( 1 )]
+collision_layer = 7169
+collision_mask = 7169
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 182.397, -1265.64 )
@@ -36,4 +39,7 @@ block_system_path = NodePath("../BlockSystem")
 
 [node name="Walls" parent="." instance=ExtResource( 6 )]
 position = Vector2( -1150.03, -1444.58 )
+
+[node name="ScreenShakeSystem" parent="." instance=ExtResource( 7 )]
+camera_path = NodePath("../Camera2D")
 

@@ -6,6 +6,8 @@ onready var vert_collider = $Colliders/VertCollider
 onready var horiz_collider = $Colliders/HorizCollider
 onready var size = $CollisionShape2D.shape.extents
 
+const COLLIDER_SIZE = 50
+
 ## For Verlet integration
 var prev_position = Vector2()
 var cur_velocity = Vector2()
@@ -24,3 +26,8 @@ func can_be_grabbed() -> bool:
 		if other.is_in_group("blocks") and other.global_position.y < global_position.y:
 			return false
 	return true
+
+func set_collider_disabled(is_disabled):
+	vert_collider.get_node("CollisionShape2D").disabled = is_disabled
+	horiz_collider.get_node("CollisionShape2D").disabled = is_disabled
+	$CollisionShape2D.disabled = is_disabled

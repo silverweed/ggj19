@@ -27,11 +27,14 @@ func _draw():
 func _process(delta):
 	update()
 	if carried_block:
-		carried_block.global_position = $BlockCarryingPos.global_position+Vector2(0,-COLLIDER_OFFSET)
+		carried_block.global_position = $BlockCarryingPos.global_position #+Vector2(0,-COLLIDER_OFFSET)
+		carried_block.set_collider_disabled(true)
+		
 
 func _input(event):	
 	if event.is_action_pressed("throw_block_" + str(owner_id)):
 		if carried_block:
+			carried_block.set_collider_disabled(false)
 			carried_block.throw(calc_throw_vector())
 			carried_block = null
 		
