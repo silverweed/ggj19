@@ -2,6 +2,8 @@ extends Node
 
 const Block = preload("res://block/Block.gd")
 
+export var floor_y = 0
+
 var gravity = Vector2(0, 1000)
 
 var sleeping_blocks = []
@@ -26,13 +28,17 @@ func _physics_process(delta):
 		
 		if must_freeze_block(block):
 			set_block_as_sleeping(block)
+			continue
+		
+		if block_colliding_horizontally(block):
+			block.cur_velocity.x = 0
 			
 
 func register_all_blocks():
 	for block in get_tree().get_nodes_in_group("blocks"):
 		sleeping_blocks.append(block)
 		block.connect("thrown", self, "set_block_as_travelling")
-		if block.position.y < 0:
+		if block.position.y < floor_y:
 			set_block_as_travelling(block)
 	print("registered ", sleeping_blocks.size(), " sleeping blocks and ",
 		travelling_blocks.size(), " travelling blocks")
@@ -45,7 +51,7 @@ func set_block_as_travelling(block : Block):
 	
 	sleeping_blocks.erase(block)
 	travelling_blocks.append(block)
-	block.vert_collider.disabled = false
+	#block.vert_collider.disabled = false
 	
 	
 func set_block_as_sleeping(block : Block):
@@ -54,20 +60,40 @@ func set_block_as_sleeping(block : Block):
 	
 	travelling_blocks.erase(block)
 	sleeping_blocks.append(block)
-	block.vert_collider.disabled = true
+	#block.vert_collider.disabled = true
 	
 	
-func must_freeze_block(block : Block):
-	for area in block.vert_collider.get_parent().get_overlapping_areas():
+func must_freeze_block(block : Block) -> bool:
+	for area in block.vert_collider.get_overlapping_areas():
 		var other = area.get_parent().get_parent()
 		if !(other is Block):
+			continue
+			
+		if other == block:
 			continue
 			
 		if other.position.y < block.position.y:
 			continue
 			
-		if (other in sleeping_blocks):
+		if !(other in sleeping_blocks):
+			continue
+			
+		var diff = other.global_position - block.global_position
+		if block.cur_velocity.dot(diff) > 0:
 			return true
 	
 	return false  
+	
+
+func block_colliding_horizontally(block : Block) -> bool:
+	for area in block.horiz_collider.get_overlapping_areas():
+		var other = area.get_parent().get_parent()
+		if !(other is Block):
+			continue
+			
+		if other == block:
+			continue
+			
+		return true
 		
+	return false

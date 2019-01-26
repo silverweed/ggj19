@@ -2,7 +2,8 @@ extends KinematicBody2D
 
 signal thrown(self_block)
 
-onready var vert_collider = $Colliders/VertCollider/CollisionShape2D
+onready var vert_collider = $Colliders/VertCollider
+onready var horiz_collider = $Colliders/HorizCollider
 
 ## For Verlet integration
 var prev_position = Vector2()

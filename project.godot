@@ -19,6 +19,10 @@ config/name="ggj19"
 run/main_scene="res://TestMap.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+FPS="*res://FPS.tscn"
+
 [display]
 
 window/size/width=1920
