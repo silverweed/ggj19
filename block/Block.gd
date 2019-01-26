@@ -14,6 +14,8 @@ var cur_velocity = Vector2()
 var throw_time = 0
 
 var timer : Timer
+
+onready var main_cld_disable_timer = $MainColliderDisableTimer
 	
 	
 static func get_exclusive_collision_layer() -> int:
@@ -99,3 +101,14 @@ func set_collider_disabled(is_disabled):
 func animate():
 	$AnimationPlayer.play("idle")
 	timer.wait_time = 5 + rand_range(0, 10)
+	
+
+func disable_main_collider_for(seconds : float):
+	$CollisionShape2D.disabled = true
+	main_cld_disable_timer.wait_time = seconds
+	main_cld_disable_timer.start()
+
+
+func _on_MainColliderDisableTimer_timeout():
+	$CollisionShape2D.disabled = false
+	main_cld_disable_timer.stop()
