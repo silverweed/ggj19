@@ -2,6 +2,9 @@ extends Node
 
 const Block = preload("res://block/Block.gd")
 
+const SNAP_HORIZONTALLY = 1
+const SNAP_VERTICALLY = 1 << 1
+
 export var floor_y = 0
 
 var gravity = Vector2(0, 1000)
@@ -19,11 +22,8 @@ func _physics_process(delta):
 							block.cur_velocity * delta + \
 							0.5 * gravity * delta * delta
 		var new_velocity = block.cur_velocity + gravity * delta
+		
 		block.position = new_position
-#		block.move_and_collide(new_velocity * delta)
-#		if block.is_on_floor():
-#			travelling_blocks.erase(block)
-#			blocks.append(block)
 		block.cur_velocity = new_velocity
 		
 		if must_freeze_block(block):
@@ -32,7 +32,7 @@ func _physics_process(delta):
 		
 		if block_colliding_horizontally(block):
 			block.cur_velocity.x = 0
-			
+
 
 func register_all_blocks():
 	for block in get_tree().get_nodes_in_group("blocks"):
@@ -80,6 +80,7 @@ func must_freeze_block(block : Block) -> bool:
 			
 		var diff = other.global_position - block.global_position
 		if block.cur_velocity.dot(diff) > 0:
+			snap_block_to_block(block, other, SNAP_VERTICALLY)
 			return true
 	
 	return false  
@@ -93,7 +94,18 @@ func block_colliding_horizontally(block : Block) -> bool:
 			
 		if other == block:
 			continue
-			
+		
+		snap_block_to_block(block, other, SNAP_HORIZONTALLY)
 		return true
 		
 	return false
+	
+	
+func snap_block_to_block(to_snap : Block, pivot : Block, snap_mode : int):
+	if snap_mode & SNAP_VERTICALLY:
+		var sgn = -1 if pivot.global_position.y > to_snap.global_position.y else 1
+		to_snap.global_position.y = pivot.global_position.y + sgn * 2 * pivot.size.y
+
+	if snap_mode & SNAP_HORIZONTALLY:
+		var sgn = -1 if pivot.global_position.x > to_snap.global_position.x else 1
+		to_snap.global_position.x = pivot.global_position.x + sgn * 2 * pivot.size.x

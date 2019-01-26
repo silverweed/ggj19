@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 const Block = preload("res://block/Block.gd")
 
-var throw_impulse = Vector2(500, -500)
+var throw_impulse = Vector2(1500, -500)
 var jump_impulse = 2000
 var velocity = Vector2()
 var speed = 500

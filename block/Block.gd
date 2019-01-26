@@ -4,6 +4,7 @@ signal thrown(self_block)
 
 onready var vert_collider = $Colliders/VertCollider
 onready var horiz_collider = $Colliders/HorizCollider
+onready var size = $CollisionShape2D.shape.extents
 
 ## For Verlet integration
 var prev_position = Vector2()
