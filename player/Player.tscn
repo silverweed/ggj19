@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
-[ext_resource path="res://player/PlayerSplatteredFX.tscn" type="PackedScene" id=3]
+[ext_resource path="res://player/BlockCarrying.gd" type="Script" id=3]
+[ext_resource path="res://player/PlayerSplatteredFX.tscn" type="PackedScene" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -30,13 +31,15 @@ shape = SubResource( 1 )
 
 [node name="GrabBlockArea" type="Area2D" parent="."]
 position = Vector2( 69.3748, 0 )
+script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabBlockArea"]
 position = Vector2( 3.07355, 0.439083 )
 shape = SubResource( 2 )
 
-[node name="BlockCarryingPos" type="Position2D" parent="."]
-position = Vector2( 0, -111.952 )
+[node name="BlockCarryingPos" type="Position2D" parent="GrabBlockArea"]
+position = Vector2( -69.3748, -111.952 )
+scale = Vector2( 1, 1 )
 
 [node name="Hitbox" type="Area2D" parent="."]
 
@@ -45,11 +48,11 @@ shape = SubResource( 3 )
 
 [node name="FX" type="Node2D" parent="."]
 
-[node name="Splatter" parent="FX" instance=ExtResource( 3 )]
+[node name="Splatter" parent="FX" instance=ExtResource( 4 )]
 position = Vector2( -0.462211, 0 )
 z_index = 1
 emitting = false
 
-[connection signal="body_entered" from="GrabBlockArea" to="." method="_on_GrabBlockArea_body_entered"]
-[connection signal="body_exited" from="GrabBlockArea" to="." method="_on_GrabBlockArea_body_exited"]
+[connection signal="body_entered" from="GrabBlockArea" to="GrabBlockArea" method="_on_GrabBlockArea_body_entered"]
+[connection signal="body_exited" from="GrabBlockArea" to="GrabBlockArea" method="_on_GrabBlockArea_body_exited"]
 [connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]

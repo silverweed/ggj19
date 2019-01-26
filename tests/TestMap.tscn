@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://level/Ground.tscn" type="PackedScene" id=1]
-[ext_resource path="res://player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://block/BlockSystem.tscn" type="PackedScene" id=3]
-[ext_resource path="res://block/Block.tscn" type="PackedScene" id=4]
-[ext_resource path="res://level/LevelLayout.tscn" type="PackedScene" id=5]
+[ext_resource path="res://block/BlockSystem.tscn" type="PackedScene" id=2]
+[ext_resource path="res://block/Block.tscn" type="PackedScene" id=3]
+[ext_resource path="res://level/LevelLayout.tscn" type="PackedScene" id=4]
+[ext_resource path="res://player/PlayerManager.tscn" type="PackedScene" id=5]
 
 [node name="TestMap" type="Node2D"]
 position = Vector2( 256, -14.3575 )
@@ -18,18 +18,18 @@ zoom = Vector2( 1.5, 1.5 )
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( -176.339, -883.524 )
-block_system_path = NodePath("../BlockSystem")
+[node name="BlockSystem" parent="." instance=ExtResource( 2 )]
 
-[node name="BlockSystem" parent="." instance=ExtResource( 3 )]
-
-[node name="Block" parent="." instance=ExtResource( 4 )]
+[node name="Block" parent="." instance=ExtResource( 3 )]
 position = Vector2( -128, -1521.64 )
 
-[node name="Block2" parent="." instance=ExtResource( 4 )]
+[node name="Block2" parent="." instance=ExtResource( 3 )]
 position = Vector2( 256, -881.643 )
 
-[node name="LevelLayout" parent="." instance=ExtResource( 5 )]
+[node name="LevelLayout" parent="." instance=ExtResource( 4 )]
 position = Vector2( -640, -753.643 )
+
+[node name="PlayerManager" parent="." instance=ExtResource( 5 )]
+position = Vector2( -640, -1649.64 )
+block_system_path = NodePath("../BlockSystem")
 
