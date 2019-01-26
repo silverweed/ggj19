@@ -2,18 +2,10 @@
 
 [ext_resource path="res://level/Sky.gd" type="Script" id=1]
 [ext_resource path="res://level/sprites/sky.png" type="Texture" id=2]
-[ext_resource path="res://level/Sun.tscn" type="PackedScene" id=3]
-[ext_resource path="res://level/Moon.tscn" type="PackedScene" id=4]
-[ext_resource path="res://level/Clouds.gd" type="Script" id=5]
-
-[sub_resource type="Environment" id=1]
-
-background_mode = 4
-background_canvas_max_layer = 1
-glow_strength = 0.5
-glow_bloom = 0.5
-glow_blend_mode = 1
-glow_hdr_threshold = 0.42
+[ext_resource path="res://level/sprites/sky_mountains_background_.png" type="Texture" id=3]
+[ext_resource path="res://level/Sun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://level/Moon.tscn" type="PackedScene" id=5]
+[ext_resource path="res://level/Clouds.gd" type="Script" id=6]
 
 [node name="Sky" type="Node2D"]
 script = ExtResource( 1 )
@@ -23,20 +15,23 @@ position = Vector2( 553.458, 263.483 )
 scale = Vector2( 1.57652, 1.48793 )
 texture = ExtResource( 2 )
 
+[node name="Forebackground" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.556863 )
+position = Vector2( 553.458, 370 )
+scale = Vector2( 1.57652, 1.48793 )
+texture = ExtResource( 3 )
+
 [node name="SunMoonPivot" type="Position2D" parent="."]
 position = Vector2( 610.348, 932.856 )
 rotation = -0.947726
 
-[node name="Sun" parent="SunMoonPivot" instance=ExtResource( 3 )]
+[node name="Sun" parent="SunMoonPivot" instance=ExtResource( 4 )]
 position = Vector2( 1225.77, -180.428 )
 
-[node name="Moon" parent="SunMoonPivot" instance=ExtResource( 4 )]
+[node name="Moon" parent="SunMoonPivot" instance=ExtResource( 5 )]
 position = Vector2( -1320.62, 210.559 )
 
 [node name="Clouds" type="Position2D" parent="."]
 position = Vector2( 538.531, -364.572 )
-script = ExtResource( 5 )
-
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource( 1 )
+script = ExtResource( 6 )
 

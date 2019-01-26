@@ -20,6 +20,7 @@ z_index = -1
 
 [node name="Walls" parent="." instance=ExtResource( 2 )]
 position = Vector2( -1024, -1393.64 )
+sky_path = NodePath("../Sky")
 
 [node name="House" parent="Walls" instance=ExtResource( 3 )]
 position = Vector2( 73.687, -367.792 )
@@ -32,6 +33,7 @@ id = 1
 position = Vector2( -1408, -1393.64 )
 collision_layer = 7169
 collision_mask = 7169
+sky_path = NodePath("../Sky")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 304.538, -1265.64 )
