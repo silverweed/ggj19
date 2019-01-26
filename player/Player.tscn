@@ -30,5 +30,8 @@ position = Vector2( 69.3748, 0 )
 position = Vector2( 3.07355, 0.439083 )
 shape = SubResource( 2 )
 
+[node name="BlockCarryingPos" type="Position2D" parent="."]
+position = Vector2( 0, -111.952 )
+
 [connection signal="body_entered" from="GrabBlockArea" to="." method="_on_GrabBlockArea_body_entered"]
 [connection signal="body_exited" from="GrabBlockArea" to="." method="_on_GrabBlockArea_body_exited"]
