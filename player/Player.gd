@@ -4,7 +4,8 @@ const Block = preload("res://block/Block.gd")
 
 const MAX_JUMPS = 1 #TODO double jumps
 const COOLDOWN_JUMP = 0.5
-const GRAVITIES = [100,200]
+const GRAVITIES = [50,210]
+const MAX_VELOCITY = 700
 
 # todo raccogliere blocchi => sotto di te
 # todo gravità non lineare nel salto gravità iniziale X gravità X++
@@ -22,7 +23,10 @@ var jump_count = 0
 var time_since_last_jump = 0
 
 var velocity = Vector2()
-var speed = 500
+
+var acceleration = 2
+var deceleration = 20
+var speed = 600
 var gravity = Vector2(0, GRAVITIES[0])
 
 
@@ -30,12 +34,20 @@ var grabbable_block : Block = null
 var prev_velocity = Vector2(1, 0)
 
 func _physics_process(delta):
-	velocity.x = 0
+	#velocity.x = 0
 	if Input.is_action_pressed("move_left"):
-		velocity.x -= speed
-	if Input.is_action_pressed("move_right"):
-		velocity.x += speed
-	
+			velocity.x = max(velocity.x-speed*acceleration*delta,-MAX_VELOCITY)
+	elif Input.is_action_pressed("move_right"):
+			velocity.x = min(velocity.x+speed*acceleration*delta,MAX_VELOCITY)
+	#if Input.is_action_just_released("move_left") || Input.is_action_just_released("move_right"):
+		#velocity.x = 0
+	else:
+		if velocity.x != 0:
+			var current_velocity = velocity.x
+			velocity.x -= deceleration * sign(velocity.x)
+			if sign(velocity.x) != sign(current_velocity):
+				velocity.x = 0
+		
 	velocity += gravity
 	time_since_last_jump += delta
 	
