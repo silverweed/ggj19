@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 [gd_scene load_steps=8 format=2]
-=======
-[gd_scene load_steps=6 format=2]
->>>>>>> b253b9010ce9949df18961b28ff67a7fbd767158
 
 [ext_resource path="res://level/Ground.tscn" type="PackedScene" id=1]
 [ext_resource path="res://block/BlockSystem.tscn" type="PackedScene" id=2]
