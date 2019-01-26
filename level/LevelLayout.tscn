@@ -4,6 +4,7 @@
 
 [node name="LevelLayout" type="Node2D"]
 editor/display_folded = true
+position = Vector2( 3.4248, -178.089 )
 
 [node name="Block" parent="." instance=ExtResource( 1 )]
 position = Vector2( -256, 0 )
@@ -12,46 +13,46 @@ position = Vector2( -256, 0 )
 position = Vector2( -384, 0 )
 
 [node name="Block20" parent="." instance=ExtResource( 1 )]
-position = Vector2( -134.072, -250.692 )
+position = Vector2( 136.76, -496.414 )
 
 [node name="Block31" parent="." instance=ExtResource( 1 )]
-position = Vector2( -127.117, -405.193 )
+position = Vector2( 494.048, -1039.13 )
 
 [node name="Block27" parent="." instance=ExtResource( 1 )]
-position = Vector2( 118.128, -262.836 )
+position = Vector2( -295.278, -594.091 )
 
 [node name="Block32" parent="." instance=ExtResource( 1 )]
-position = Vector2( -104.396, -805.861 )
+position = Vector2( 217.807, -1185.15 )
 
 [node name="Block21" parent="." instance=ExtResource( 1 )]
-position = Vector2( -11.3802, -260.544 )
+position = Vector2( 698.829, -634.199 )
 
 [node name="Block25" parent="." instance=ExtResource( 1 )]
-position = Vector2( -108.94, -540.009 )
+position = Vector2( 206.414, -706.961 )
 
 [node name="Block24" parent="." instance=ExtResource( 1 )]
-position = Vector2( -136.344, -129.548 )
+position = Vector2( 179.01, -296.5 )
 
 [node name="Block33" parent="." instance=ExtResource( 1 )]
-position = Vector2( 234.143, -131.82 )
+position = Vector2( 549.497, -298.772 )
 
 [node name="Block22" parent="." instance=ExtResource( 1 )]
-position = Vector2( -13.6523, -390.816 )
+position = Vector2( 696.557, -942.56 )
 
 [node name="Block30" parent="." instance=ExtResource( 1 )]
-position = Vector2( 0.119385, -513.508 )
+position = Vector2( -13.1309, -964.014 )
 
 [node name="Block26" parent="." instance=ExtResource( 1 )]
-position = Vector2( -15.9244, -141.672 )
+position = Vector2( 299.43, -308.624 )
 
 [node name="Block28" parent="." instance=ExtResource( 1 )]
-position = Vector2( 115.995, -393.872 )
+position = Vector2( -228.51, -854.978 )
 
 [node name="Block23" parent="." instance=ExtResource( 1 )]
-position = Vector2( 120.4, -130.292 )
+position = Vector2( 435.754, -297.244 )
 
 [node name="Block29" parent="." instance=ExtResource( 1 )]
-position = Vector2( -113.484, -673.317 )
+position = Vector2( 205.295, -908.765 )
 
 [node name="Block14" parent="." instance=ExtResource( 1 )]
 position = Vector2( 896, 0 )
