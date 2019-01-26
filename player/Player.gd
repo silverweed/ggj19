@@ -3,6 +3,7 @@ extends KinematicBody2D
 signal player_dead(id)
 
 const Block = preload("res://block/Block.gd")
+const PlayerSplatteredFX = preload("res://player/PlayerSplatteredFX.tscn")
 
 const MAX_JUMPS = 1
 const COOLDOWN_JUMP = 0.5
@@ -29,8 +30,15 @@ var prev_velocity = Vector2(1, 0)
 var safety_timer = 0
 
 onready var block_carrying = $GrabBlockArea
-onready var splatter_fx = $FX/Splatter
 
+	
+static func get_exclusive_collision_layer() -> int:
+	return 1 << 5
+
+func _ready():
+	collision_layer |= get_exclusive_collision_layer()
+	
+	
 func _physics_process(delta):
 	var wished_dir = compute_wished_dir()
 	
@@ -103,7 +111,7 @@ func compute_wished_dir() -> int:
 	return wished_dir
 	
 
-func _on_Hitbox_body_entered(body : PhysicsBody2D):
+func try_kill(body : PhysicsBody2D):
 	if !body.is_in_group("hurting_player"):
 		return
 	
@@ -119,9 +127,10 @@ func _on_Hitbox_body_entered(body : PhysicsBody2D):
 
 		
 func die():
+	var splatter_fx = PlayerSplatteredFX.instance()
 	splatter_fx.emitting = true
 	splatter_fx.restart()
+	splatter_fx.global_position = global_position
+	get_parent().add_child(splatter_fx)
 	emit_signal("player_dead", id)
-	
-		
 	

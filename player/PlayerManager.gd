@@ -6,7 +6,7 @@ const Player = preload("res://player/Player.gd")
 
 export (NodePath) var block_system_path
 
-var time_to_spawn = 8
+var time_to_spawn = 5
  
 func _ready():
 	init_players()
