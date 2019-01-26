@@ -9,11 +9,12 @@ onready var size = $CollisionShape2D.shape.extents
 ## For Verlet integration
 var prev_position = Vector2()
 var cur_velocity = Vector2()
-
+var throw_time = 0
 
 func throw(initial_velocity : Vector2):
 	prev_position = position
 	cur_velocity = initial_velocity
+	throw_time = 0;
 
 	emit_signal("thrown", self)
 	

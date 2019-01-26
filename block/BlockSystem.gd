@@ -7,7 +7,9 @@ const SNAP_VERTICALLY = 1 << 1
 
 export var floor_y = 0
 
-var gravity = Vector2(0, 2000)
+var gravity = Vector2(0, 25000)
+var transient = 1
+var damping = 0.8
 
 var sleeping_blocks = []
 var travelling_blocks = []
@@ -18,11 +20,18 @@ func _ready():
 
 func _physics_process(delta):
 	for block in travelling_blocks:
+		
+		# interpolator to transition from the low friction area to the hig friction one
+		var interpolant = min(block.throw_time/transient, 1)
+		
 		var new_position =  block.position + \
 							block.cur_velocity * delta + \
 							0.5 * gravity * delta * delta
-		var new_velocity = block.cur_velocity + gravity * delta
+		var new_velocity = block.cur_velocity + Vector2 (0, lerp(0, gravity.y, interpolant) * delta)
 		
+		new_velocity *= lerp(1, damping, interpolant)
+		
+		block.throw_time += delta
 		block.position = new_position
 		block.cur_velocity = new_velocity
 		

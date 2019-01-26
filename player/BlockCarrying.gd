@@ -13,7 +13,7 @@ var carried_block : Block = null
 # This is set by PlayerManager
 var block_system : BlockSystem = null
 
-var throw_impulse = 1500
+var throw_impulse = 4000
 var throw_direction = Vector2()
 
 
