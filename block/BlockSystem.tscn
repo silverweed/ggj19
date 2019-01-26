@@ -2,6 +2,8 @@
 
 [ext_resource path="res://block/BlockSystem.gd" type="Script" id=1]
 
-[node name="BlockSystem" type="Node"]
+[node name="BlockSystem" type="Node" groups=[
+"block_system",
+]]
 script = ExtResource( 1 )
 

@@ -11,8 +11,8 @@ extents = Vector2( 64.0843, 90.0886 )
 ]]
 position = Vector2( -384, -574.637 )
 scale = Vector2( 7.7382, 2.59305 )
-collision_layer = 1025
-collision_mask = 1025
+collision_layer = 3073
+collision_mask = 3073
 
 [node name="GroundSprite" type="Sprite" parent="."]
 scale = Vector2( 6.52787, 1 )

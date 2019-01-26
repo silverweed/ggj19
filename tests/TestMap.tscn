@@ -20,14 +20,15 @@ drag_margin_v_enabled = false
 
 [node name="Player" parent="." instance=ExtResource( 2 )]
 position = Vector2( -176.339, -883.524 )
+block_system_path = NodePath("../BlockSystem")
 
 [node name="BlockSystem" parent="." instance=ExtResource( 3 )]
 
 [node name="Block" parent="." instance=ExtResource( 4 )]
-position = Vector2( 0, -1649.64 )
+position = Vector2( -128, -1521.64 )
 
 [node name="Block2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 231.3, -915.83 )
+position = Vector2( 256, -881.643 )
 
 [node name="LevelLayout" parent="." instance=ExtResource( 5 )]
 position = Vector2( -640, -753.643 )

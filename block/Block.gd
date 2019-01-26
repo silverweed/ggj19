@@ -16,3 +16,11 @@ func throw(initial_velocity : Vector2):
 	cur_velocity = initial_velocity
 
 	emit_signal("thrown", self)
+	
+	
+func can_be_grabbed() -> bool:
+	for area in vert_collider.get_overlapping_areas():
+		var other = area.get_parent().get_parent()
+		if other.is_in_group("blocks") and other.global_position.y < global_position.y:
+			return false
+	return true

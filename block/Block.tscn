@@ -17,6 +17,7 @@ extents = Vector2( 40, 63 )
 
 [node name="Block" type="KinematicBody2D" groups=[
 "blocks",
+"hurting_player",
 ]]
 script = ExtResource( 1 )
 

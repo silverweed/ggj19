@@ -7,7 +7,7 @@ const SNAP_VERTICALLY = 1 << 1
 
 export var floor_y = 0
 
-var gravity = Vector2(0, 1000)
+var gravity = Vector2(0, 2000)
 
 var sleeping_blocks = []
 var travelling_blocks = []
@@ -28,7 +28,6 @@ func _physics_process(delta):
 		
 		if must_freeze_block(block):
 			set_block_as_sleeping(block)
-			continue
 		
 		if block_colliding_horizontally(block):
 			block.cur_velocity.x = 0
@@ -51,7 +50,6 @@ func set_block_as_travelling(block : Block):
 	
 	sleeping_blocks.erase(block)
 	travelling_blocks.append(block)
-	#block.vert_collider.disabled = false
 	
 	
 func set_block_as_sleeping(block : Block):
@@ -60,16 +58,16 @@ func set_block_as_sleeping(block : Block):
 	
 	travelling_blocks.erase(block)
 	sleeping_blocks.append(block)
-	#block.vert_collider.disabled = true
 	
 	
 func must_freeze_block(block : Block) -> bool:
+	for body in block.vert_collider.get_overlapping_bodies():
+		if body.is_in_group("ground"):
+			return true
+	
 	for area in block.vert_collider.get_overlapping_areas():
 		var other = area.get_parent().get_parent()
 		if !(other is Block):
-			continue
-			
-		if other == block:
 			continue
 			
 		if other.position.y < block.position.y:
@@ -109,3 +107,7 @@ func snap_block_to_block(to_snap : Block, pivot : Block, snap_mode : int):
 	if snap_mode & SNAP_HORIZONTALLY:
 		var sgn = -1 if pivot.global_position.x > to_snap.global_position.x else 1
 		to_snap.global_position.x = pivot.global_position.x + sgn * 2 * pivot.size.x
+		
+		
+func is_sleeping(block : Block) -> bool:
+	return block in sleeping_blocks
