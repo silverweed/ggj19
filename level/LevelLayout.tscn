@@ -3,6 +3,7 @@
 [ext_resource path="res://block/Block.tscn" type="PackedScene" id=1]
 
 [node name="LevelLayout" type="Node2D"]
+editor/display_folded = true
 
 [node name="Block" parent="." instance=ExtResource( 1 )]
 position = Vector2( -256, 0 )
@@ -11,46 +12,46 @@ position = Vector2( -256, 0 )
 position = Vector2( -384, 0 )
 
 [node name="Block20" parent="." instance=ExtResource( 1 )]
-position = Vector2( -384, -128 )
+position = Vector2( -134.072, -250.692 )
 
 [node name="Block31" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2304, -128 )
+position = Vector2( -127.117, -405.193 )
 
 [node name="Block27" parent="." instance=ExtResource( 1 )]
-position = Vector2( -384, -640 )
+position = Vector2( 118.128, -262.836 )
 
 [node name="Block32" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2304, -640 )
+position = Vector2( -104.396, -805.861 )
 
 [node name="Block21" parent="." instance=ExtResource( 1 )]
-position = Vector2( -384, -256 )
+position = Vector2( -11.3802, -260.544 )
 
 [node name="Block25" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2304, -256 )
+position = Vector2( -108.94, -540.009 )
 
 [node name="Block24" parent="." instance=ExtResource( 1 )]
-position = Vector2( -384, -768 )
+position = Vector2( -136.344, -129.548 )
 
 [node name="Block33" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2304, -768 )
+position = Vector2( 234.143, -131.82 )
 
 [node name="Block22" parent="." instance=ExtResource( 1 )]
-position = Vector2( -384, -384 )
+position = Vector2( -13.6523, -390.816 )
 
 [node name="Block30" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2304, -384 )
+position = Vector2( 0.119385, -513.508 )
 
 [node name="Block26" parent="." instance=ExtResource( 1 )]
-position = Vector2( -384, -896 )
+position = Vector2( -15.9244, -141.672 )
 
 [node name="Block28" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2304, -896 )
+position = Vector2( 115.995, -393.872 )
 
 [node name="Block23" parent="." instance=ExtResource( 1 )]
-position = Vector2( -384, -512 )
+position = Vector2( 120.4, -130.292 )
 
 [node name="Block29" parent="." instance=ExtResource( 1 )]
-position = Vector2( 2304, -512 )
+position = Vector2( -113.484, -673.317 )
 
 [node name="Block14" parent="." instance=ExtResource( 1 )]
 position = Vector2( 896, 0 )
