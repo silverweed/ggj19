@@ -1,20 +1,19 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://level/Sky.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/Walls.tscn" type="PackedScene" id=2]
 [ext_resource path="res://house/House.tscn" type="PackedScene" id=3]
 [ext_resource path="res://level/Ground.tscn" type="PackedScene" id=4]
 [ext_resource path="res://block/BlockSystem.tscn" type="PackedScene" id=5]
-[ext_resource path="res://block/Block.tscn" type="PackedScene" id=6]
-[ext_resource path="res://level/LevelLayout.tscn" type="PackedScene" id=7]
-[ext_resource path="res://player/PlayerManager.tscn" type="PackedScene" id=8]
-[ext_resource path="res://effects/ScreenShakeSystem.tscn" type="PackedScene" id=9]
+[ext_resource path="res://player/PlayerManager.tscn" type="PackedScene" id=6]
+[ext_resource path="res://effects/ScreenShakeSystem.tscn" type="PackedScene" id=7]
+[ext_resource path="res://level/spawner.tscn" type="PackedScene" id=8]
 
 [node name="TestMap" type="Node2D"]
 position = Vector2( 256, -14.3575 )
 
 [node name="Sky" parent="." instance=ExtResource( 1 )]
-position = Vector2( -256, -1649.64 )
+position = Vector2( -252.395, -1646.04 )
 scale = Vector2( 0.997403, 0.989082 )
 z_index = -1
 
@@ -42,19 +41,15 @@ drag_margin_v_enabled = false
 
 [node name="BlockSystem" parent="." instance=ExtResource( 5 )]
 
-[node name="Block" parent="." instance=ExtResource( 6 )]
-position = Vector2( -128, -1521.64 )
-
-[node name="Block2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 256, -881.643 )
-
-[node name="LevelLayout" parent="." instance=ExtResource( 7 )]
-position = Vector2( -640, -753.643 )
-
-[node name="PlayerManager" parent="." instance=ExtResource( 8 )]
-position = Vector2( -512, -1649.64 )
+[node name="PlayerManager" parent="." instance=ExtResource( 6 )]
 block_system_path = NodePath("../BlockSystem")
 
-[node name="ScreenShakeSystem" parent="." instance=ExtResource( 9 )]
+[node name="ScreenShakeSystem" parent="." instance=ExtResource( 7 )]
 camera_path = NodePath("../Camera2D")
+
+[node name="spawner" parent="." instance=ExtResource( 8 )]
+position = Vector2( -700, 0 )
+block_system_path = NodePath("../BlockSystem")
+block_n = 25
+area = 18
 

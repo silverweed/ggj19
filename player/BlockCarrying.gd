@@ -16,6 +16,7 @@ var block_system : BlockSystem = null
 var throw_impulse = 4000
 
 
+
 onready var owner_id = get_parent().id
 
 

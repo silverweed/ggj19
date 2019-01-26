@@ -10,9 +10,9 @@ const SNAP_VERTICALLY = 1 << 1
 
 export var floor_y = 0
 
-var gravity = Vector2(0, 25000)
+var gravity = Vector2(0, 35000)
 var transient = 1
-var damping = 0.8
+var damping = 0.9
 
 var skinwidth = 20
 
@@ -28,7 +28,6 @@ func _ready():
 
 func _physics_process(delta):
 	
-
 	for block in travelling_blocks:
 		
 		# interpolator to transition from the low friction area to the hig friction one
