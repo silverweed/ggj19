@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+const Block = preload("res://block/Block.gd")
 
 const MAX_JUMPS = 1
 const COOLDOWN_JUMP = 0.5
@@ -101,8 +102,14 @@ func _on_Hitbox_body_entered(body : PhysicsBody2D):
 	if !body.is_in_group("hurting_player"):
 		return
 	
+	assert (body is Block)
+	if(block_carrying.block_system.is_sleeping(body)):
+		return;
+	
+	
 	var diff = global_position - body.global_position
-	if diff.dot(body.cur_velocity) < 0:
+	print(body.cur_velocity)
+	if diff.dot(body.cur_velocity) > 0:
 		die()
 		
 		

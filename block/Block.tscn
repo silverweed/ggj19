@@ -16,8 +16,8 @@ extents = Vector2( 63, 40 )
 extents = Vector2( 40, 63 )
 
 [node name="Block" type="KinematicBody2D" groups=[
-"blocks",
 "hurting_player",
+"blocks",
 ]]
 script = ExtResource( 1 )
 
@@ -33,16 +33,16 @@ shape = SubResource( 1 )
 position = Vector2( 0, -60 )
 
 [node name="HorizCollider" type="Area2D" parent="Colliders"]
-collision_layer = 1024
-collision_mask = 1024
+collision_layer = 2048
+collision_mask = 2048
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/HorizCollider"]
 position = Vector2( 0.166077, -0.332153 )
 shape = SubResource( 2 )
 
 [node name="VertCollider" type="Area2D" parent="Colliders"]
-collision_layer = 2048
-collision_mask = 2048
+collision_layer = 4096
+collision_mask = 4096
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Colliders/VertCollider"]
 shape = SubResource( 3 )
