@@ -130,7 +130,7 @@ func die():
 	var splatter_fx = PlayerSplatteredFX.instance()
 	splatter_fx.emitting = true
 	splatter_fx.restart()
-	splatter_fx.global_position = global_position
 	get_parent().add_child(splatter_fx)
+	splatter_fx.global_position = global_position
 	emit_signal("player_dead", id)
 	
