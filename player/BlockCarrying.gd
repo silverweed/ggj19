@@ -6,6 +6,7 @@ const Block = preload("res://block/Block.gd")
 const BlockSystem = preload("res://block/BlockSystem.gd")
 
 const THROW_AXIS_DEADZONE = 0.1
+const COLLIDER_OFFSET = 26
 
 var grabbable_block : Block = null
 var carried_block : Block = null
@@ -26,8 +27,7 @@ func _draw():
 func _process(delta):
 	update()
 	if carried_block:
-		carried_block.global_position = $BlockCarryingPos.global_position
-		
+		carried_block.global_position = $BlockCarryingPos.global_position+Vector2(0,-COLLIDER_OFFSET)
 
 func _input(event):	
 	if event.is_action_pressed("throw_block_" + str(owner_id)):
