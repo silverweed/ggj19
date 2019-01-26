@@ -3,7 +3,7 @@
 [ext_resource path="res://level/Sky.gd" type="Script" id=1]
 [ext_resource path="res://level/sprites/sky.png" type="Texture" id=2]
 [ext_resource path="res://level/Sun.tscn" type="PackedScene" id=3]
-[ext_resource path="res://level/sprites/moon.png" type="Texture" id=4]
+[ext_resource path="res://level/Moon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://level/Clouds.gd" type="Script" id=5]
 
 [sub_resource type="Environment" id=1]
@@ -25,14 +25,13 @@ texture = ExtResource( 2 )
 
 [node name="SunMoonPivot" type="Position2D" parent="."]
 position = Vector2( 610.348, 932.856 )
-rotation = -1.01002
+rotation = -0.947726
 
 [node name="Sun" parent="SunMoonPivot" instance=ExtResource( 3 )]
 position = Vector2( 1225.77, -180.428 )
 
-[node name="Moon" type="Sprite" parent="SunMoonPivot"]
-position = Vector2( -1230.66, 221.519 )
-texture = ExtResource( 4 )
+[node name="Moon" parent="SunMoonPivot" instance=ExtResource( 4 )]
+position = Vector2( -1320.62, 210.559 )
 
 [node name="Clouds" type="Position2D" parent="."]
 position = Vector2( 538.531, -364.572 )

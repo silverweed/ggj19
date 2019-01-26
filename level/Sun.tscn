@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://level/sprites/sun.png" type="Texture" id=1]
+[ext_resource path="res://level/sprites/sun_eyes_animation.png" type="Texture" id=1]
 [ext_resource path="res://level/Sun.gd" type="Script" id=2]
 [ext_resource path="res://level/sprites/rays.png" type="Texture" id=3]
+[ext_resource path="res://level/sprites/SunMoon.tres" type="Animation" id=4]
 
 [sub_resource type="Animation" id=1]
 
@@ -23,15 +24,26 @@ tracks/0/keys = {
 
 [node name="Sun" type="Sprite"]
 texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 384, 128, 128, 128 )
 script = ExtResource( 2 )
 
 [node name="Rays" type="Sprite" parent="."]
 show_behind_parent = true
-rotation = 3.23998
+rotation = 6.28319
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="RaysAnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.02
 anims/rotate_rays = SubResource( 1 )
 
+[node name="SunAnimationPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 20.0
+anims/idle = ExtResource( 4 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

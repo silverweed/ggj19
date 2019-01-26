@@ -3,7 +3,7 @@ extends Node2D
 const DAY_COLOR = Color("ffffff")
 const NIGHT_COLOR = Color("3d2375")
 
-const DAYNIGHT_CYCLE = 6
+const DAYNIGHT_CYCLE = 60
 
 var time = 0
 var time_direction = 1
