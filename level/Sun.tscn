@@ -31,14 +31,6 @@ rotation = 3.23998
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 3 )
 
-[node name="Light2D" type="Light2D" parent="Rays"]
-visible = false
-rotation = -1.16067
-scale = Vector2( 0.666667, 0.666667 )
-texture = ExtResource( 3 )
-range_z_min = -1
-range_z_max = -1
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 playback_speed = 0.02
 anims/rotate_rays = SubResource( 1 )

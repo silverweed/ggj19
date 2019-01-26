@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://level/Sky.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/Walls.tscn" type="PackedScene" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://level/LevelLayout.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/PlayerManager.tscn" type="PackedScene" id=8]
 [ext_resource path="res://effects/ScreenShakeSystem.tscn" type="PackedScene" id=9]
+[ext_resource path="res://effects/ScreenshakeListener.tscn" type="PackedScene" id=10]
 
 [node name="TestMap" type="Node2D"]
 position = Vector2( 256, -14.3575 )
@@ -57,4 +58,8 @@ block_system_path = NodePath("../BlockSystem")
 
 [node name="ScreenShakeSystem" parent="." instance=ExtResource( 9 )]
 camera_path = NodePath("../Camera2D")
+
+[node name="ScreenshakeListener" parent="." instance=ExtResource( 10 )]
+block_system_path = NodePath("../BlockSystem")
+screenshake_system_path = NodePath("../ScreenShakeSystem")
 
