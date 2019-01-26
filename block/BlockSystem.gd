@@ -1,0 +1,73 @@
+extends Node
+
+const Block = preload("res://block/Block.gd")
+
+var gravity = Vector2(0, 1000)
+
+var sleeping_blocks = []
+var travelling_blocks = []
+
+func _ready():
+	call_deferred("register_all_blocks")
+
+
+func _physics_process(delta):
+	for block in travelling_blocks:
+		var new_position =  block.position + \
+							block.cur_velocity * delta + \
+							0.5 * gravity * delta * delta
+		var new_velocity = block.cur_velocity + gravity * delta
+		block.position = new_position
+#		block.move_and_collide(new_velocity * delta)
+#		if block.is_on_floor():
+#			travelling_blocks.erase(block)
+#			blocks.append(block)
+		block.cur_velocity = new_velocity
+		
+		if must_freeze_block(block):
+			set_block_as_sleeping(block)
+			
+
+func register_all_blocks():
+	for block in get_tree().get_nodes_in_group("blocks"):
+		sleeping_blocks.append(block)
+		block.connect("thrown", self, "set_block_as_travelling")
+		if block.position.y < 0:
+			set_block_as_travelling(block)
+	print("registered ", sleeping_blocks.size(), " sleeping blocks and ",
+		travelling_blocks.size(), " travelling blocks")
+		
+		
+func set_block_as_travelling(block : Block):
+	assert(block in sleeping_blocks)
+	# TODO handle restart
+	assert(!(block in travelling_blocks))
+	
+	sleeping_blocks.erase(block)
+	travelling_blocks.append(block)
+	block.vert_collider.disabled = false
+	
+	
+func set_block_as_sleeping(block : Block):
+	assert(block in travelling_blocks)
+	assert(!(block in sleeping_blocks))
+	
+	travelling_blocks.erase(block)
+	sleeping_blocks.append(block)
+	block.vert_collider.disabled = true
+	
+	
+func must_freeze_block(block : Block):
+	for area in block.vert_collider.get_parent().get_overlapping_areas():
+		var other = area.get_parent().get_parent()
+		if !(other is Block):
+			continue
+			
+		if other.position.y < block.position.y:
+			continue
+			
+		if (other in sleeping_blocks):
+			return true
+	
+	return false  
+		
