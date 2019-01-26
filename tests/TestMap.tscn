@@ -11,6 +11,8 @@
 position = Vector2( 256, -14.3575 )
 
 [node name="Ground" parent="." instance=ExtResource( 1 )]
+collision_layer = 7169
+collision_mask = 7169
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 182.397, -1265.64 )
