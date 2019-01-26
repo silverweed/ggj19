@@ -1,19 +1,18 @@
 extends Node
 
-
-
 const MAX_PLAYERS = 2
-const ACTIONS = ["move_left","move_right","grab_block","throw_block","jump"]
-var player0 
-var player1
+const ACTIONS = ["move_left","move_right","grab_block","throw_block","jump"] 
+
+const Player = preload("res://player/Player.gd")
 
 var action_map = []
 
 func _ready():
-	resetMap()
+	set_managers()
+	reset_map()
 
 func _process(delta):
-	resetMap()
+	reset_map()
 
 func _input(event):
 	for i in range(MAX_PLAYERS):
@@ -22,9 +21,14 @@ func _input(event):
 				action_map[i][action] = true
 				return
 
-func resetMap():
+func reset_map():
 	for i in range(MAX_PLAYERS):
 		var dictionary = {}
 		for action in ACTIONS:
 			dictionary[action]=false
 		action_map.push_back(dictionary)
+		
+func set_managers():
+	for child in self.get_children():
+		if child is Player:
+			child.player_manager = self

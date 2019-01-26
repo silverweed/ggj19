@@ -2,20 +2,13 @@ extends KinematicBody2D
 
 const Block = preload("res://block/Block.gd")
 
-const MAX_JUMPS = 1 #TODO double jumps
+const MAX_JUMPS = 1
 const COOLDOWN_JUMP = 0.5
 const NORMAL_GRAVITY = 150
 const STRONG_GRAVITY = 210
 const MAX_VELOCITY = 1000
 
-# todo raccogliere blocchi => sotto di te
-# todo gravità non lineare nel salto gravità iniziale X gravità X++
-	#velocità y negativa, poi cambia segno
-# todo wall jump
-# todo muore con un tasto
-# todo respawn
-# to know scale positiva verso destra negativa verso sinistra 0;0 in alto a sinistra, gravità positiva
-
+var player_manager = null;
 
 var throw_impulse = Vector2(500, -500)
 
