@@ -2,11 +2,29 @@ extends KinematicBody2D
 
 const Block = preload("res://block/Block.gd")
 
-var throw_impulse = Vector2(1500, -500)
-var jump_impulse = 2000
+const MAX_JUMPS = 1 #TODO double jumps
+const COOLDOWN_JUMP = 0.5
+const GRAVITIES = [100,200]
+
+# todo raccogliere blocchi => sotto di te
+# todo gravità non lineare nel salto gravità iniziale X gravità X++
+	#velocità y negativa, poi cambia segno
+# todo wall jump
+# todo muore con un tasto
+# todo respawn
+# to know scale positiva verso destra negativa verso sinistra 0;0 in alto a sinistra, gravità positiva
+
+
+var throw_impulse = Vector2(500, -500)
+
+var jump_impulse = 3000
+var jump_count = 0
+var time_since_last_jump = 0
+
 var velocity = Vector2()
 var speed = 500
-var gravity = Vector2(0, 100)
+var gravity = Vector2(0, GRAVITIES[0])
+
 
 var grabbable_block : Block = null
 var prev_velocity = Vector2(1, 0)
@@ -19,11 +37,15 @@ func _physics_process(delta):
 		velocity.x += speed
 	
 	velocity += gravity
+	time_since_last_jump += delta
 	
-	#move_and_collide(norm_velocity * delta)
+	if velocity.y != 0 && sign(velocity.y) != sign(prev_velocity.y):
+		gravity.y = GRAVITIES[1]
+	
 	move_and_slide(velocity, Vector2(0, -1))
 	if is_on_floor():
 		velocity.y = 0
+		jump_count = 0
 	
 	if velocity.x != 0:
 		if sign(velocity.x) != sign(prev_velocity.x):
@@ -36,7 +58,7 @@ func _input(event):
 		if grabbable_block:
 			grabbable_block.throw(throw_impulse)
 	elif event.is_action_pressed("jump"):
-		velocity.y -= jump_impulse
+		jump()
 
 
 func _on_GrabBlockArea_body_entered(body):
@@ -46,3 +68,10 @@ func _on_GrabBlockArea_body_entered(body):
 func _on_GrabBlockArea_body_exited(body):
 	if body == grabbable_block:
 		grabbable_block = null
+
+func jump():
+	if jump_count < MAX_JUMPS && time_since_last_jump >= COOLDOWN_JUMP:
+		velocity.y -= jump_impulse
+		jump_count += 1
+		time_since_last_jump = 0
+
