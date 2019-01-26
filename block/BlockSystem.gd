@@ -97,6 +97,7 @@ func try_cast(delta : float, center : Vector2, block : Block, horiz : bool) -> b
 		return check_cast_x(result, block) 
 	else:
 		return check_cast_y(result, block)
+		
 	
 func check_cast_x(result : Dictionary, block : Block) -> bool:
 	if !result.empty():
@@ -107,6 +108,7 @@ func check_cast_x(result : Dictionary, block : Block) -> bool:
 		return true
 		
 	return false
+	
 
 func check_cast_y(result : Dictionary, block : Block) -> bool:
 	if !result.empty():

@@ -69,3 +69,6 @@ shape = SubResource( 3 )
 playback_speed = 10.0
 anims/idle = SubResource( 4 )
 
+[node name="MainColliderDisableTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="MainColliderDisableTimer" to="." method="_on_MainColliderDisableTimer_timeout"]
