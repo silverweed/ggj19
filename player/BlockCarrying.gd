@@ -14,7 +14,6 @@ var carried_block : Block = null
 var block_system : BlockSystem = null
 
 var throw_impulse = 4000
-var throw_direction = Vector2()
 
 
 onready var owner_id = get_parent().id

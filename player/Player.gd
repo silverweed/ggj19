@@ -26,8 +26,7 @@ var prev_velocity = Vector2(1, 0)
 
 onready var block_carrying = $GrabBlockArea
 onready var splatter_fx = $FX/Splatter
-	
-	
+
 func _physics_process(delta):
 	var wished_dir = compute_wished_dir()
 	
@@ -108,7 +107,6 @@ func _on_Hitbox_body_entered(body : PhysicsBody2D):
 	
 	
 	var diff = global_position - body.global_position
-	print(body.cur_velocity)
 	if diff.dot(body.cur_velocity) > 0:
 		die()
 		

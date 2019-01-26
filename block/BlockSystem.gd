@@ -1,7 +1,9 @@
 extends CanvasItem
 
-const Block = preload("res://block/Block.gd")
 signal blocks_collided
+
+const Block = preload("res://block/Block.gd")
+const Player = preload("res://player/Player.gd")
 
 const SNAP_HORIZONTALLY = 1
 const SNAP_VERTICALLY = 1 << 1
@@ -18,6 +20,8 @@ var sleeping_blocks = []
 var travelling_blocks = []
 
 var players = []
+
+var block_cl = Block.get_exclusive_collision_layer()
 
 func _ready():
 	call_deferred("register_all_blocks")
@@ -62,8 +66,9 @@ func experimental_collision(block: Block, delta) -> bool:
 				 Vector2( block.size.x - skinwidth, 0) * sign(block.cur_velocity.x)
 	var shift = Vector2( 0 , - block.size.x + skinwidth)
 	var intensity = Vector2 ( delta + skinwidth, 0);
+
 	
-	var result = space_state.intersect_ray(center, center + intensity ,ignore)
+	var result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
 	if(!result.empty()):
 		var p = result.position
 		var sgn = -1 if p.x > block.global_position.x else 1
@@ -71,7 +76,7 @@ func experimental_collision(block: Block, delta) -> bool:
 		return true
 		
 	center += shift
-	result = space_state.intersect_ray(center, center + intensity, ignore)
+	result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
 	if(!result.empty()):
 		var p = result.position
 		var sgn = -1 if p.x > block.global_position.x else 1
@@ -79,7 +84,7 @@ func experimental_collision(block: Block, delta) -> bool:
 		return true
 		
 	center += shift
-	result = space_state.intersect_ray(center, center + intensity, ignore)
+	result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
 	if(!result.empty()):
 		var p = result.position
 		var sgn = -1 if p.x > block.global_position.x else 1
@@ -100,7 +105,7 @@ func experimental_collision_v(block: Block, delta) -> bool:
 	var shift = Vector2(+ block.size.y - skinwidth, 0)
 	var intensity = Vector2 (0, delta + skinwidth);
 	
-	var result = space_state.intersect_ray(center, center + intensity , players)
+	var result = space_state.intersect_ray(center, center + intensity , [block], block_cl)
 	if(!result.empty()):
 		var p = result.position
 		var sgn = -1 if p.y > block.global_position.y else 1
@@ -108,7 +113,7 @@ func experimental_collision_v(block: Block, delta) -> bool:
 		return true
 		
 	center += shift
-	result = space_state.intersect_ray(center, center + intensity, players)
+	result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
 	if(!result.empty()):
 		var p = result.position
 		var sgn = -1 if p.y > block.global_position.y else 1
@@ -116,7 +121,7 @@ func experimental_collision_v(block: Block, delta) -> bool:
 		return true
 		
 	center += shift
-	result = space_state.intersect_ray(center, center + intensity, players)
+	result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
 	if(!result.empty()):
 		var p = result.position
 		var sgn = -1 if p.y > block.global_position.y else 1

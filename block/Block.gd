@@ -14,7 +14,12 @@ var cur_velocity = Vector2()
 var throw_time = 0
 
 var timer : Timer
+	
+	
+static func get_exclusive_collision_layer() -> int:
+	return 1 << 4
 
+	
 func _ready():
 	var r = randi() % 16
 	match r:
@@ -28,6 +33,9 @@ func _ready():
 		timer.connect("timeout", self, "animate")
 		timer.start()
 		add_child(timer)
+	
+	collision_layer |= get_exclusive_collision_layer()
+	
 	
 	
 func throw(initial_velocity : Vector2):

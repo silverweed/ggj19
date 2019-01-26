@@ -34,13 +34,12 @@ tracks/0/keys = {
 }
 
 [node name="Block" type="KinematicBody2D" groups=[
-"hurting_player",
 "blocks",
+"hurting_player",
 ]]
 script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 0, 53.1431 )
 scale = Vector2( 1.88572, 1.88572 )
 texture = ExtResource( 2 )
 region_enabled = true
