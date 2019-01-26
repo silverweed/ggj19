@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/sprites/player_anim/player_idle0000.png" type="Texture" id=2]
@@ -25,6 +25,10 @@
 [ext_resource path="res://player/sprites/player_anim/player_walk0003.png" type="Texture" id=23]
 [ext_resource path="res://player/sprites/player_anim/player_walk0000.png" type="Texture" id=24]
 [ext_resource path="res://player/BlockCarrying.gd" type="Script" id=25]
+[ext_resource path="res://player/sounds/lift.ogg" type="AudioStream" id=26]
+[ext_resource path="res://player/sounds/throw.ogg" type="AudioStream" id=27]
+[ext_resource path="res://player/sounds/splat.ogg" type="AudioStream" id=28]
+[ext_resource path="res://player/sounds/jump_cute.ogg" type="AudioStream" id=29]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -85,7 +89,6 @@ rotation = -3.14159
 scale = Vector2( 2, -1.92323 )
 frames = SubResource( 1 )
 animation = "idle"
-frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -103,6 +106,13 @@ shape = SubResource( 3 )
 [node name="BlockCarryingPos" type="Position2D" parent="GrabBlockArea"]
 position = Vector2( -69.2006, -92.5745 )
 
+[node name="PickUp" type="AudioStreamPlayer2D" parent="GrabBlockArea"]
+stream = ExtResource( 26 )
+attenuation = 0.5
+
+[node name="Throw" type="AudioStreamPlayer2D" parent="GrabBlockArea"]
+stream = ExtResource( 27 )
+
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 16
@@ -111,6 +121,12 @@ collision_mask = 16
 position = Vector2( 0.439126, -28.1366 )
 shape = SubResource( 4 )
 disabled = true
+
+[node name="Splat" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 28 )
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 29 )
 
 [connection signal="body_entered" from="GrabBlockArea" to="GrabBlockArea" method="_on_GrabBlockArea_body_entered"]
 [connection signal="body_exited" from="GrabBlockArea" to="GrabBlockArea" method="_on_GrabBlockArea_body_exited"]
