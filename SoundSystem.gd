@@ -3,8 +3,8 @@ extends Node
 const MAX_CONCURRENT_SOUNDS = 6
 
 const SOUNDS = {
-	# FIXME
-	"blocks_collide": preload("res://player/sounds/splat.ogg")
+	"blocks_collide": preload("res://block/sounds/block_impact.ogg"),
+	"blocks_destroying": preload("res://block/sounds/block_impact.ogg")
 }
 
 export (NodePath) var block_system_path
