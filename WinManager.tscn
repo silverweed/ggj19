@@ -4,6 +4,7 @@
 [ext_resource path="res://sounds/mus_win.ogg" type="AudioStream" id=2]
 
 [node name="WinManager" type="Node"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="WonTheme" type="AudioStreamPlayer" parent="."]

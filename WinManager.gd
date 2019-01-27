@@ -16,4 +16,4 @@ func on_player_won(id):
 		return
 		
 	accept_win = false
-	#self.get_tree().get_paused(true)
+	self.get_tree().paused = true
