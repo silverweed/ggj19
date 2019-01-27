@@ -16,6 +16,9 @@ var throw_impulse = 4000
 var offset = 100
 var recoil = 3000
 
+var grab_anim = 0.05
+var grab_time
+
 onready var owner_id = get_parent().id
 onready var front_grab_pos = get_node("../FrontGrabPos").position
 onready var down_grab_pos = get_node("../DownGrabPos").position
@@ -32,9 +35,15 @@ func _draw():
 	
 func _process(delta):
 	update()
+	
+	
+	
 	if carried_block:
-		carried_block.global_position = get_node("../BlockCarryingPos").global_position
-		carried_block.set_collider_disabled(true)
+		var interpolant = min(1, grab_time/grab_anim)
+		grab_time += delta
+		
+		var pos = global_position.linear_interpolate(get_node("../BlockCarryingPos").global_position, interpolant)
+		carried_block.global_position = pos
 	
 	if is_looking_down():
 		position = down_grab_pos
@@ -57,8 +66,11 @@ func _input(event):
 			$Throw.play()
 		
 		elif grabbable_block:
+			grab_time = 0
 			$PickUp.play()
 			carried_block = grabbable_block
+			carried_block.set_collider_disabled(true)
+			block_system.awake(carried_block)
 			grabbable_block = null
 
 	
@@ -74,9 +86,9 @@ func calc_throw_vector() -> Vector2:
 		)
 	
 	if axis.length_squared() < THROW_AXIS_DEADZONE:
-		return Vector2(sign(owner.facing), -0.1).normalized()
+		return Vector2(sign(owner.facing), -0.2).normalized()
 
-	axis += Vector2(0, -0.2)
+	axis += Vector2(sign(owner.facing) * 0.2, -0.2)
 	return axis.normalized()
 	
 func calc_throw_vector_alternative():
