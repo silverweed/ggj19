@@ -15,7 +15,7 @@ var transient = 1
 var damping = 0.9
 
 # collision
-var skinwidth = 20
+var skinwidth = 30
 
 # blocks
 var sleeping_blocks = []

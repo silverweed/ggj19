@@ -61,6 +61,8 @@ func _input(event):
 			carried_block.global_position += throw_dir * offset
 			carried_block = null
 			if owner.airborne:
+				if throw_dir.y > 0 and owner.velocity.y > 0:
+					 owner.velocity.y = 0
 				owner.velocity -= throw_dir * recoil
 				owner.global_position -= throw_dir * offset
 			$Throw.play()
