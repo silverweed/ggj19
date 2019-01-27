@@ -9,7 +9,8 @@
 [ext_resource path="res://effects/ScreenShakeSystem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/PlayerManager.tscn" type="PackedScene" id=8]
 [ext_resource path="res://effects/FXSystem.tscn" type="PackedScene" id=9]
-[ext_resource path="res://SoundSystem.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sounds/SoundSystem.tscn" type="PackedScene" id=10]
+
 
 [node name="TestMap" type="Node2D"]
 position = Vector2( 256, -14.3575 )

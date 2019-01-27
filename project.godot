@@ -22,6 +22,7 @@ config/icon="res://icon.png"
 [autoload]
 
 FPS="*res://FPS.tscn"
+MainTheme="*res://sounds/MainTheme.tscn"
 
 [display]
 
