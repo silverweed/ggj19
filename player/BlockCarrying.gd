@@ -29,8 +29,10 @@ func _process(delta):
 		
 
 func _input(event):	
+	
 	if event.is_action_pressed("throw_block_" + str(owner_id)):
 		if carried_block:
+		
 			carried_block.set_collider_disabled(false)
 			carried_block.disable_main_collider_for(BLOCK_CLD_DISABLE_TIME_AFTER_THROW)
 			carried_block.throw(calc_throw_vector())
@@ -59,7 +61,30 @@ func calc_throw_vector() -> Vector2:
 
 	return axis.normalized() * throw_impulse
 	
+func calc_throw_vector_alternative():
+#	var mouse_pos = get_global_mouse_position()
+#	return (mouse_pos - global_position).normalized() * throw_impulse * sign(scale.x)
+
+	var axis = Vector2(
+		Input.get_action_strength("aim_right_" + str(owner_id)) - \
+			Input.get_action_strength("aim_left_" + str(owner_id)), \
+			2 * Input.get_action_strength("aim_down_" + str(owner_id)) - \
+			2 * Input.get_action_strength("aim_up_" + str(owner_id))
+		)
+		
+	print(Input.get_action_strength("aim_up_" + str(owner_id)))
 	
+	if axis.length_squared() < THROW_AXIS_DEADZONE:
+		return 0
+
+	carried_block.set_collider_disabled(false)
+	carried_block.disable_main_collider_for(BLOCK_CLD_DISABLE_TIME_AFTER_THROW)
+	carried_block.throw(axis.normalized() * throw_impulse)
+	carried_block = null
+	$Throw.play()
+
+	return 
+
 
 func _on_GrabBlockArea_body_entered(body):
 	if body.is_in_group("blocks") and !carried_block:
