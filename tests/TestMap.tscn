@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://level/Sky.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/Walls.tscn" type="PackedScene" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://effects/ScreenshakeListener.tscn" type="PackedScene" id=6]
 [ext_resource path="res://effects/ScreenShakeSystem.tscn" type="PackedScene" id=7]
 [ext_resource path="res://player/PlayerManager.tscn" type="PackedScene" id=8]
+[ext_resource path="res://effects/FXSystem.tscn" type="PackedScene" id=9]
 
 [node name="TestMap" type="Node2D"]
 position = Vector2( 256, -14.3575 )
@@ -57,4 +58,7 @@ block_system_path = NodePath("../BlockSystem")
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2( -700, 0 )
+
+[node name="FXSystem" parent="." instance=ExtResource( 9 )]
+block_system_path = NodePath("../BlockSystem")
 

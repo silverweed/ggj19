@@ -12,7 +12,7 @@ func _ready():
 		block_system.connect("blocks_collided", self, "on_blocks_collided")
 		
 
-func on_blocks_collided(ignore_direction : Vector2):
+func on_blocks_collided(ignore_direction : Vector2, pos : Vector2):
 	var expl = ExplFX.instance()
-	expl.global_position = Vector2(200, 200)
+	expl.global_position = pos
 	add_child(expl)

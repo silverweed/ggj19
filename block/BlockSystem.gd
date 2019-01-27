@@ -1,6 +1,6 @@
 extends CanvasItem
 
-signal blocks_collided(direction)
+signal blocks_collided(direction, position)
 signal block_destroyed
 
 onready var block_prefab = preload("res://block/Block.tscn")
@@ -153,7 +153,7 @@ func check_cast_x(result : Dictionary, block : Block) -> bool:
 		var p = result.position
 		var sgn = -1 if p.x > block.global_position.x else 1
 		block.global_position.x = p.x + sgn * block.size.x
-		emit_signal("blocks_collided", Vector2(1, 0))
+		emit_signal("blocks_collided", Vector2(1, 0), block.global_position)
 		return true
 	return false
 
@@ -163,7 +163,7 @@ func check_cast_y(result : Dictionary, block : Block) -> bool:
 		var p = result.position
 		var sgn = -1 if p.y > block.global_position.y else 1
 		block.global_position.y = p.y + sgn * block.size.y
-		emit_signal("blocks_collided", Vector2(0, 1))
+		emit_signal("blocks_collided", Vector2(0, 1), block.global_position)
 		return true
 		
 	return false
