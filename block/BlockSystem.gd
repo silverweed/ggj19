@@ -18,6 +18,7 @@ var travelling_blocks = []
 
 
 var block_cl = Block.get_exclusive_collision_layer()
+var player_cl = Player.get_exclusive_collision_layer()
 
 func _ready():
 	call_deferred("register_all_blocks")
@@ -26,7 +27,6 @@ func _ready():
 func _physics_process(delta):
 	
 	for block in travelling_blocks:
-		
 		# interpolator to transition from the low friction area to the hig friction one
 		var interpolant = min(block.throw_time/transient, 1)
 		
@@ -49,6 +49,7 @@ func _physics_process(delta):
 		block.position.y += delta_pos.y
 		if experimental_collision_v(block, delta_pos.y):
 			set_block_as_sleeping(block)
+			
 		
 func experimental_collision(block: Block, delta : float) -> bool:
 	# use global coordinates, not local to node
@@ -91,6 +92,11 @@ func try_cast(delta : float, center : Vector2, block : Block, horiz : bool) -> b
 	var space_state = Physics2DServer.space_get_direct_state(space_rid)
 	var intensity = Vector2(delta + skinwidth, 0) if horiz else Vector2(0, delta + skinwidth)
 	
+	var player_result = space_state.intersect_ray(center, center + intensity, [block], player_cl)
+	if !player_result.empty():
+		player_result.collider.try_kill(block)
+		
+	
 	var result = space_state.intersect_ray(center, center + intensity, [block], block_cl)
 	if horiz:
 		return check_cast_x(result, block) 
@@ -122,13 +128,16 @@ func check_cast_y(result : Dictionary, block : Block) -> bool:
 
 func register_all_blocks():
 	for block in get_tree().get_nodes_in_group("blocks"):
-		sleeping_blocks.append(block)
-		block.connect("thrown", self, "set_block_as_travelling")
-		if block.position.y < floor_y:
-			set_block_as_travelling(block)
+		add_block(block)
 	print("registered ", sleeping_blocks.size(), " sleeping blocks and ",
 		travelling_blocks.size(), " travelling blocks")
 		
+		
+func add_block(block : Block):
+	sleeping_blocks.append(block)
+	block.connect("thrown", self, "set_block_as_travelling")
+	if block.position.y < floor_y:
+		set_block_as_travelling(block)
 		
 func set_block_as_travelling(block : Block):
 	assert(block in sleeping_blocks)

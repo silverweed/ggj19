@@ -15,13 +15,14 @@ func _ready ():
 	delay = 0;
 	blocks_left = block_n
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	if delay <= 0 and blocks_left > 0:
 		var b = block_prefab.instance()
 		add_child(b)
 		b.position = Vector2(120 * (randi() % area), -3000)
-		block_system.travelling_blocks.append(b)
+		block_system.add_block(b)
 		delay = 0.15
 		blocks_left = blocks_left - 1
 	else :

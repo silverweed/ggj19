@@ -1,69 +1,68 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
-[ext_resource path="res://player/PlayerSplatteredFX.tscn" type="PackedScene" id=2]
-[ext_resource path="res://player/sprites/player_anim/player_idle0000.png" type="Texture" id=3]
-[ext_resource path="res://player/sprites/player_anim/player_idle0001.png" type="Texture" id=4]
-[ext_resource path="res://player/sprites/player_anim/player_idle0002.png" type="Texture" id=5]
-[ext_resource path="res://player/sprites/player_anim/player_idle0003.png" type="Texture" id=6]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0000.png" type="Texture" id=7]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0001.png" type="Texture" id=8]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0002.png" type="Texture" id=9]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0003.png" type="Texture" id=10]
-[ext_resource path="res://player/sprites/player_anim/player_grab0000.png" type="Texture" id=11]
-[ext_resource path="res://player/sprites/player_anim/player_grab0001.png" type="Texture" id=12]
-[ext_resource path="res://player/sprites/player_anim/player_grab0002.png" type="Texture" id=13]
-[ext_resource path="res://player/sprites/player_anim/player_grab0003.png" type="Texture" id=14]
-[ext_resource path="res://player/sprites/player_anim/player_walk0001.png" type="Texture" id=15]
-[ext_resource path="res://player/sprites/player_anim/player_walk0002.png" type="Texture" id=16]
-[ext_resource path="res://player/sprites/player_anim/player_walk0003.png" type="Texture" id=17]
-[ext_resource path="res://player/sprites/player_anim/player_walk0000.png" type="Texture" id=18]
-[ext_resource path="res://player/sprites/player_anim/player_grab0004.png" type="Texture" id=19]
-[ext_resource path="res://player/sprites/player_anim/player_grab0005.png" type="Texture" id=20]
-[ext_resource path="res://player/sprites/player_anim/player_jump0000.png" type="Texture" id=21]
-[ext_resource path="res://player/sprites/player_anim/player_jump0001.png" type="Texture" id=22]
-[ext_resource path="res://player/sprites/player_anim/player_jump0002.png" type="Texture" id=23]
-[ext_resource path="res://player/sprites/player_anim/player_jump0003.png" type="Texture" id=24]
-[ext_resource path="res://player/sprites/player_anim/player_jump0004.png" type="Texture" id=25]
-[ext_resource path="res://player/BlockCarrying.gd" type="Script" id=26]
+[ext_resource path="res://player/sprites/player_anim/player_idle0000.png" type="Texture" id=2]
+[ext_resource path="res://player/sprites/player_anim/player_idle0001.png" type="Texture" id=3]
+[ext_resource path="res://player/sprites/player_anim/player_idle0002.png" type="Texture" id=4]
+[ext_resource path="res://player/sprites/player_anim/player_idle0003.png" type="Texture" id=5]
+[ext_resource path="res://player/sprites/player_anim/player_grab0004.png" type="Texture" id=6]
+[ext_resource path="res://player/sprites/player_anim/player_grab0005.png" type="Texture" id=7]
+[ext_resource path="res://player/sprites/player_anim/player_jump0000.png" type="Texture" id=8]
+[ext_resource path="res://player/sprites/player_anim/player_jump0001.png" type="Texture" id=9]
+[ext_resource path="res://player/sprites/player_anim/player_jump0002.png" type="Texture" id=10]
+[ext_resource path="res://player/sprites/player_anim/player_jump0003.png" type="Texture" id=11]
+[ext_resource path="res://player/sprites/player_anim/player_jump0004.png" type="Texture" id=12]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0000.png" type="Texture" id=13]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0001.png" type="Texture" id=14]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0002.png" type="Texture" id=15]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0003.png" type="Texture" id=16]
+[ext_resource path="res://player/sprites/player_anim/player_grab0000.png" type="Texture" id=17]
+[ext_resource path="res://player/sprites/player_anim/player_grab0001.png" type="Texture" id=18]
+[ext_resource path="res://player/sprites/player_anim/player_grab0002.png" type="Texture" id=19]
+[ext_resource path="res://player/sprites/player_anim/player_grab0003.png" type="Texture" id=20]
+[ext_resource path="res://player/sprites/player_anim/player_walk0001.png" type="Texture" id=21]
+[ext_resource path="res://player/sprites/player_anim/player_walk0002.png" type="Texture" id=22]
+[ext_resource path="res://player/sprites/player_anim/player_walk0003.png" type="Texture" id=23]
+[ext_resource path="res://player/sprites/player_anim/player_walk0000.png" type="Texture" id=24]
+[ext_resource path="res://player/BlockCarrying.gd" type="Script" id=25]
 
 [sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
-"loop": true,
-"name": "walk_grab",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ) ],
-"loop": true,
-"name": "grab",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
-"loop": true,
-"name": "walk",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 19 ), ExtResource( 20 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "throw",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ) ],
+"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
 "loop": true,
 "name": "jump",
 "speed": 8.0
+}, {
+"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": true,
+"name": "walk_grab",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
+"loop": true,
+"name": "grab",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "walk",
+"speed": 5.0
 } ]
 
 [sub_resource type="RectangleShape2D" id=2]
 
-extents = Vector2( 12.2074, 46.6026 )
+extents = Vector2( 33.7545, 47.0304 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
@@ -71,8 +70,8 @@ extents = Vector2( 37.7485, 38.5556 )
 
 [sub_resource type="CapsuleShape2D" id=4]
 
-radius = 34.5966
-height = 82.9744
+radius = 50.0004
+height = 48.7422
 
 [node name="Player" type="KinematicBody2D" groups=[
 "players",
@@ -80,16 +79,10 @@ height = 82.9744
 scale = Vector2( 0.7, 0.7 )
 script = ExtResource( 1 )
 
-[node name="FX" type="Node2D" parent="."]
-scale = Vector2( 1, 1 )
-
-[node name="Splatter" parent="FX" instance=ExtResource( 2 )]
-position = Vector2( -0.462211, 0 )
-z_index = 1
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="FX"]
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 position = Vector2( 3.43654, -8.11673 )
-scale = Vector2( -2, 1.92323 )
+rotation = -3.14159
+scale = Vector2( 2, -1.92323 )
 frames = SubResource( 1 )
 animation = "idle"
 frame = 3
@@ -101,7 +94,7 @@ shape = SubResource( 2 )
 
 [node name="GrabBlockArea" type="Area2D" parent="."]
 position = Vector2( 69.3748, 0 )
-script = ExtResource( 26 )
+script = ExtResource( 25 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabBlockArea"]
 position = Vector2( 0.439095, 0.439061 )
@@ -111,13 +104,13 @@ shape = SubResource( 3 )
 position = Vector2( -69.2006, -92.5745 )
 
 [node name="Hitbox" type="Area2D" parent="."]
-collision_layer = 1025
-collision_mask = 1025
+collision_layer = 16
+collision_mask = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
-position = Vector2( 0.439083, -31.4329 )
+position = Vector2( 0.439126, -28.1366 )
 shape = SubResource( 4 )
+disabled = true
 
 [connection signal="body_entered" from="GrabBlockArea" to="GrabBlockArea" method="_on_GrabBlockArea_body_entered"]
 [connection signal="body_exited" from="GrabBlockArea" to="GrabBlockArea" method="_on_GrabBlockArea_body_exited"]
-[connection signal="body_entered" from="Hitbox" to="." method="_on_Hitbox_body_entered"]
