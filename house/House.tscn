@@ -7,7 +7,9 @@
 
 extents = Vector2( 32, 32 )
 
-[node name="House" type="Area2D"]
+[node name="House" type="Area2D" groups=[
+"houses",
+]]
 scale = Vector2( 3, 3 )
 script = ExtResource( 1 )
 

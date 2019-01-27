@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/mus_bloxx_theme.ogg-6ac6c0a6d3b0ef0f97bbbb80c5dbaa68.oggstr"
+
+[deps]
+
+source_file="res://sounds/mus_bloxx_theme.ogg"
+dest_files=[ "res://.import/mus_bloxx_theme.ogg-6ac6c0a6d3b0ef0f97bbbb80c5dbaa68.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

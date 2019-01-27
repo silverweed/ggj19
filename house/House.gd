@@ -14,5 +14,5 @@ func _ready():
 	
 	
 func _on_House_body_entered(body):
-	if body.is_in_group("players"):
+	if body.is_in_group("players") && body.id != id: #if body.is_in_group("players")
 		emit_signal("player_won", body.id)
