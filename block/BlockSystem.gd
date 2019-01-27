@@ -1,7 +1,7 @@
 extends CanvasItem
 
 signal blocks_collided(direction, position)
-signal block_destroyed
+signal block_destroyed(position)
 
 onready var block_prefab = preload("res://block/Block.tscn")
 const Block = preload("res://block/Block.gd")
@@ -62,6 +62,7 @@ func _physics_process(delta):
 		block.cur_velocity = new_velocity
 		
 		if (check_inner(block, 50)):
+			emit_signal("block_destroyed", block.global_position)
 			block.global_position = Vector2(spawn_offset + 122 * ( randi() % area), -2000 - 5000)
 			block.cur_velocity = Vector2()
 			continue

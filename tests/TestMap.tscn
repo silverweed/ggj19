@@ -16,7 +16,7 @@
 position = Vector2( 256, -14.3575 )
 
 [node name="Sky" parent="." instance=ExtResource( 1 )]
-position = Vector2( -252.395, -1646.04 )
+position = Vector2( -256.078, -1647.27 )
 scale = Vector2( 0.997403, 0.989082 )
 z_index = -1
 
