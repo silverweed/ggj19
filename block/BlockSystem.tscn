@@ -6,4 +6,7 @@
 "block_system",
 ]]
 script = ExtResource( 1 )
+block_n = 30
+area = 18
+spawn_offset = -700.0
 

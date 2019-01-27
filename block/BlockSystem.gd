@@ -3,26 +3,48 @@ extends CanvasItem
 signal blocks_collided(direction)
 signal block_destroyed
 
+onready var block_prefab = preload("res://block/Block.tscn")
 const Block = preload("res://block/Block.gd")
 const Player = preload("res://player/Player.gd")
 
 export var floor_y = 0
 
+# pyhsics parameters
 var gravity = Vector2(0, 35000)
 var transient = 1
 var damping = 0.9
 
+# collision
 var skinwidth = 20
 
+# blocks
 var sleeping_blocks = []
 var travelling_blocks = []
 
+var removed_blocks = []
+var activation_timer = 0
 
+# collision layers
 var block_cl = Block.get_exclusive_collision_layer()
 var player_cl = Player.get_exclusive_collision_layer()
 
-func _ready():
+export var block_n : int
+export var area : int
+export var spawn_offset : float
+
+var blocks_left = 100
+
+func _ready ():
+	blocks_left = block_n
+	
+	while blocks_left > 0:
+		var b = block_prefab.instance()
+		add_child(b)
+		b.global_position = Vector2(spawn_offset + 122 * ( randi() % area), -2000 - 200 * (blocks_left))
+		blocks_left = blocks_left - 1
+	
 	call_deferred("register_all_blocks")
+
 
 func _physics_process(delta):
 	
@@ -46,8 +68,8 @@ func _physics_process(delta):
 
 		block.position.x += delta_pos.x
 		
-		if collision_x(block, delta_pos.x): #block_colliding_horizontally(block):
-			block.cur_velocity.x = 0
+		#if collision_x(block, delta_pos.x): #block_colliding_horizontally(block):
+		#	block.cur_velocity.x = 0
 
 		block.position.y += delta_pos.y
 		if collision_y(block, delta_pos.y):
