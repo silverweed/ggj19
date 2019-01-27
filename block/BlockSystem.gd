@@ -1,6 +1,7 @@
 extends CanvasItem
 
 signal blocks_collided(direction)
+signal block_destroyed
 
 const Block = preload("res://block/Block.gd")
 const Player = preload("res://player/Player.gd")
@@ -23,7 +24,6 @@ var player_cl = Player.get_exclusive_collision_layer()
 func _ready():
 	call_deferred("register_all_blocks")
 
-
 func _physics_process(delta):
 	
 	for block in travelling_blocks:
@@ -39,6 +39,9 @@ func _physics_process(delta):
 		block.throw_time += delta
 		block.cur_velocity = new_velocity
 		
+		if (check_inner(block, 30)):
+			print("AAAAA")
+			
 		var delta_pos = new_position - block.position; 
 
 		block.position.x += delta_pos.x
@@ -86,6 +89,7 @@ func collision_y(block: Block, delta : float) -> bool:
 
 	return false
 
+
 func check_inner(block: Block, area: float ) -> bool:
 	# use global coordinates, not local to node
 	var center = block.global_position;
@@ -95,11 +99,11 @@ func check_inner(block: Block, area: float ) -> bool:
 	var space_rid = get_world_2d().space
 	var space_state = Physics2DServer.space_get_direct_state(space_rid)
 	
-	var result = space_state.intersect_ray(center + shift_1, center - shift_1, [block], player_cl)
+	var result = space_state.intersect_ray(center + shift_1, center - shift_1, [block], block_cl)
 	if !result.empty():
 		return true
 		
-	result = space_state.intersect_ray(center + shift_2, center - shift_2, [block], player_cl)
+	result = space_state.intersect_ray(center + shift_2, center - shift_2, [block], block_cl)
 	if !result.empty():
 		return true
 		

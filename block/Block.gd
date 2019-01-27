@@ -48,15 +48,15 @@ func throw(initial_velocity : Vector2):
 	emit_signal("thrown", self)
 	
 func _draw():
-	var center = Vector2(- size.y + 10, - size.y) +\
-				 Vector2( 0, size.y - 10)
-	var shift = Vector2(+ size.y - 10, 0)
-	var intensity = Vector2 ( 0, 100);
 	
-	draw_line( center, center + intensity, Color.red)
-	center += 2 * shift
+	var center = Vector2()
+	var shift_1 = Vector2( 10, 0)
+	var shift_2 = Vector2( 0, 10)
 	
-	draw_line( center, center + intensity, Color.red)
+	
+	draw_line(center + shift_1, center - shift_1, Color.red)
+	draw_line(center + shift_2, center - shift_2, Color.red)
+
 
 	
 

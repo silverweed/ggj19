@@ -68,8 +68,8 @@ func calc_throw_vector_alternative():
 	var axis = Vector2(
 		Input.get_action_strength("aim_right_" + str(owner_id)) - \
 			Input.get_action_strength("aim_left_" + str(owner_id)), \
-			2 * Input.get_action_strength("aim_down_" + str(owner_id)) - \
-			2 * Input.get_action_strength("aim_up_" + str(owner_id))
+			Input.get_action_strength("aim_down_" + str(owner_id)) - \
+			Input.get_action_strength("aim_up_" + str(owner_id))
 		)
 		
 	print(Input.get_action_strength("aim_up_" + str(owner_id)))
