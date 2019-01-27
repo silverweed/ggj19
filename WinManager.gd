@@ -8,15 +8,23 @@ func _ready():
 		if !node.is_connected("player_won", self, "on_player_won"):
 			node.connect("player_won", self, "on_player_won")
 	
-		
+
+func _input(event):
+	if !accept_win and event.is_action_pressed("restart"):
+		get_tree().paused = false
+		get_tree().change_scene_to(preload("res://tests/TestMap.tscn"))
+	
+	
 func on_player_won(id):
-	main_theme.stop()
-	$WonTheme.play()
 	if !accept_win:
 		return
 		
 	accept_win = false
-	self.get_tree().paused = true
-	#show menu
-	#self.WinMenu.position = Vector2(100,100)
+	
+	main_theme.stop()
+	$WonTheme.play()
+	$WinMenu.show()
+		
+	get_tree().paused = true
+	
 	

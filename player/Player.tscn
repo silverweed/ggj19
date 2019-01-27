@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=2]
+[gd_scene load_steps=52 format=2]
 
 [ext_resource path="res://player/Player.gd" type="Script" id=1]
 [ext_resource path="res://player/sprites/player_anim_1/player_walk0000_alt.png" type="Texture" id=2]
@@ -47,6 +47,7 @@
 [ext_resource path="res://player/sounds/throw.ogg" type="AudioStream" id=45]
 [ext_resource path="res://player/sounds/splat.ogg" type="AudioStream" id=46]
 [ext_resource path="res://player/sounds/jump_cute.ogg" type="AudioStream" id=47]
+[ext_resource path="res://player/sounds/spawn_sound.ogg" type="AudioStream" id=48]
 
 [sub_resource type="SpriteFrames" id=1]
 
@@ -133,6 +134,7 @@ rotation = -3.14159
 scale = Vector2( 2, -1.92323 )
 frames = SubResource( 1 )
 animation = "walk_grab_1"
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -167,6 +169,9 @@ stream = ExtResource( 46 )
 
 [node name="Jump" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 47 )
+
+[node name="Spawn" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 48 )
 
 [connection signal="body_entered" from="GrabBlockArea" to="GrabBlockArea" method="_on_GrabBlockArea_body_entered"]
 [connection signal="body_exited" from="GrabBlockArea" to="GrabBlockArea" method="_on_GrabBlockArea_body_exited"]

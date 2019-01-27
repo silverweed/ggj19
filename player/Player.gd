@@ -38,12 +38,16 @@ onready var block_carrying = $GrabBlockArea
 static func get_exclusive_collision_layer() -> int:
 	return 1 << 5
 
-func _ready():
+func _enter_tree():
 	if id == 1:
 		prev_velocity.x = - 1
 		scale.x *= -1
 		facing *= -1
 	collision_layer |= get_exclusive_collision_layer()
+	
+
+func _ready():
+	$AnimatedSprite.play("idle_" + str(id))
 	
 	
 func _physics_process(delta):

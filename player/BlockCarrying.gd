@@ -98,8 +98,9 @@ func calc_throw_vector() -> Vector2:
 	if axis.length_squared() < THROW_AXIS_DEADZONE:
 		return Vector2(sign(owner.facing), -0.2).normalized()
 
-	axis += Vector2(sign(owner.facing) * 0.2, -0.2)
+	axis += Vector2(0, -0.2)
 	return axis.normalized()
+	
 	
 func calc_throw_vector_alternative():
 #	var mouse_pos = get_global_mouse_position()

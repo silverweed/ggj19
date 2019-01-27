@@ -64,7 +64,7 @@ func _physics_process(delta):
 		# sanity checks
 		awake(block)
 		
-		if (check_inner(block, 50)):
+		if (check_inner(block, 40)):
 			emit_signal("block_destroyed", block.global_position)
 			block.global_position = Vector2(spawn_offset + 122 * ( randi() % area), -2000 - 5000)
 			block.cur_velocity = Vector2()
