@@ -39,6 +39,10 @@ static func get_exclusive_collision_layer() -> int:
 	return 1 << 5
 
 func _ready():
+	if id == 1:
+		prev_velocity.x = - 1
+		scale.x *= -1
+		facing *= -1
 	collision_layer |= get_exclusive_collision_layer()
 	
 	

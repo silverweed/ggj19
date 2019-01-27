@@ -133,7 +133,6 @@ rotation = -3.14159
 scale = Vector2( 2, -1.92323 )
 frames = SubResource( 1 )
 animation = "walk_grab_1"
-frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
