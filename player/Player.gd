@@ -79,6 +79,7 @@ func jump():
 		time_since_last_jump = 0
 		gravity.y = NORMAL_GRAVITY
 		jumped_last_frame = true
+		$Jump.play()
 
 
 func calc_acceleration(wished_dir : int):
@@ -133,4 +134,4 @@ func die():
 	get_parent().add_child(splatter_fx)
 	splatter_fx.global_position = global_position
 	emit_signal("player_dead", id)
-	
+	$Splat.play()
