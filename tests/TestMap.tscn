@@ -24,10 +24,10 @@ position = Vector2( -1024, -1393.64 )
 sky_path = NodePath("../Sky")
 
 [node name="House" parent="Walls" instance=ExtResource( 3 )]
-position = Vector2( 58.687, -367.792 )
+position = Vector2( 58.687, -412.113 )
 
 [node name="House2" parent="Walls" instance=ExtResource( 3 )]
-position = Vector2( 2641.62, -367.792 )
+position = Vector2( 2641.62, -412.113 )
 id = 1
 
 [node name="Ground" parent="." instance=ExtResource( 4 )]
@@ -55,7 +55,15 @@ screenshake_system_path = NodePath("../ScreenShakeSystem")
 camera_path = NodePath("../Camera2D")
 
 [node name="PlayerManager" parent="." instance=ExtResource( 8 )]
+spawn_point_0_path = NodePath("SpawnPoint0")
+spawn_point_1_path = NodePath("SpawnPoint1")
 block_system_path = NodePath("../BlockSystem")
+
+[node name="SpawnPoint0" type="Position2D" parent="PlayerManager"]
+position = Vector2( -855.649, -1827 )
+
+[node name="SpawnPoint1" type="Position2D" parent="PlayerManager"]
+position = Vector2( 1490.12, -1827 )
 
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2( -700, 0 )
