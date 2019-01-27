@@ -17,7 +17,7 @@ texture = ExtResource( 2 )
 
 [node name="Forebackground" type="Sprite" parent="."]
 self_modulate = Color( 1, 1, 1, 0.556863 )
-position = Vector2( 553.458, 370 )
+position = Vector2( 553.458, 531.286 )
 scale = Vector2( 1.57652, 1.48793 )
 texture = ExtResource( 3 )
 
