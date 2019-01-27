@@ -1,6 +1,9 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://block/BlockSystem.gd" type="Script" id=1]
+
+[sub_resource type="AudioStreamSample" id=1]
+
 
 [node name="BlockSystem" type="Node2D" groups=[
 "block_system",
@@ -9,4 +12,7 @@ script = ExtResource( 1 )
 block_n = 30
 area = 18
 spawn_offset = -700.0
+
+[node name="Collision" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 1 )
 
