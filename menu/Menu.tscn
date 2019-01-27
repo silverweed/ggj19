@@ -86,6 +86,17 @@ custom_styles/normal = SubResource( 4 )
 custom_fonts/font = SubResource( 5 )
 text = "Quit"
 
+[node name="Credits" type="Label" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -572.799
+margin_top = -20.9902
+margin_right = -5.79907
+margin_bottom = -6.99023
+text = "\"Splat\" sound adapted from https://freesound.org/people/FoolBoyMedia/sounds/237928/"
+
 [connection signal="focus_entered" from="CenterContainer/VBoxContainer/Play" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Play", true ]]
 [connection signal="focus_exited" from="CenterContainer/VBoxContainer/Play" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Play", false ]]
 [connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Play" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Play", true ]]
