@@ -43,15 +43,15 @@ func _physics_process(delta):
 
 		block.position.x += delta_pos.x
 		
-		if experimental_collision(block, delta_pos.x): #block_colliding_horizontally(block):
+		if collision_x(block, delta_pos.x): #block_colliding_horizontally(block):
 			block.cur_velocity.x = 0
 
 		block.position.y += delta_pos.y
-		if experimental_collision_v(block, delta_pos.y):
+		if collision_y(block, delta_pos.y):
 			set_block_as_sleeping(block)
 			
 		
-func experimental_collision(block: Block, delta : float) -> bool:
+func collision_x(block: Block, delta : float) -> bool:
 	# use global coordinates, not local to node
 	var center = block.global_position + Vector2(0, - skinwidth + block.size.x) +\
 				 Vector2( block.size.x - skinwidth, 0) * sign(block.cur_velocity.x)
@@ -69,7 +69,7 @@ func experimental_collision(block: Block, delta : float) -> bool:
 	return false
 
 	
-func experimental_collision_v(block: Block, delta : float) -> bool:
+func collision_y(block: Block, delta : float) -> bool:
 	# use global coordinates, not local to node
 	var center = block.global_position + Vector2(- block.size.y + skinwidth, 0) +\
 				 Vector2( 0, block.size.y - skinwidth) * sign(delta)
@@ -85,7 +85,25 @@ func experimental_collision_v(block: Block, delta : float) -> bool:
 		return true
 
 	return false
+
+func check_inner(block: Block, area: float ) -> bool:
+	# use global coordinates, not local to node
+	var center = block.global_position;
+	var shift_1 = Vector2( area, 0)
+	var shift_2 = Vector2( 0, area)
 	
+	var space_rid = get_world_2d().space
+	var space_state = Physics2DServer.space_get_direct_state(space_rid)
+	
+	var result = space_state.intersect_ray(center + shift_1, center - shift_1, [block], player_cl)
+	if !result.empty():
+		return true
+		
+	result = space_state.intersect_ray(center + shift_2, center - shift_2, [block], player_cl)
+	if !result.empty():
+		return true
+		
+	return false
 	
 func try_cast(delta : float, center : Vector2, block : Block, horiz : bool) -> bool:
 	var space_rid = get_world_2d().space
@@ -111,9 +129,8 @@ func check_cast_x(result : Dictionary, block : Block) -> bool:
 		block.global_position.x = p.x + sgn * block.size.x
 		emit_signal("blocks_collided", Vector2(1, 0))
 		return true
-		
 	return false
-	
+
 
 func check_cast_y(result : Dictionary, block : Block) -> bool:
 	if !result.empty():
@@ -131,14 +148,15 @@ func register_all_blocks():
 		add_block(block)
 	print("registered ", sleeping_blocks.size(), " sleeping blocks and ",
 		travelling_blocks.size(), " travelling blocks")
-		
-		
+
+
 func add_block(block : Block):
 	sleeping_blocks.append(block)
 	block.connect("thrown", self, "set_block_as_travelling")
 	if block.position.y < floor_y:
 		set_block_as_travelling(block)
-		
+
+
 func set_block_as_travelling(block : Block):
 	assert(block in sleeping_blocks)
 	# TODO handle restart
