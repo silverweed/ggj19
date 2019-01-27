@@ -1,28 +1,50 @@
 extends CanvasItem
 
-signal blocks_collided(direction)
+signal blocks_collided(direction, position)
 signal block_destroyed
 
+onready var block_prefab = preload("res://block/Block.tscn")
 const Block = preload("res://block/Block.gd")
 const Player = preload("res://player/Player.gd")
 
 export var floor_y = 0
 
+# pyhsics parameters
 var gravity = Vector2(0, 35000)
 var transient = 1
 var damping = 0.9
 
+# collision
 var skinwidth = 20
 
+# blocks
 var sleeping_blocks = []
 var travelling_blocks = []
 
+var removed_blocks = []
+var activation_timer = 0
 
+# collision layers
 var block_cl = Block.get_exclusive_collision_layer()
 var player_cl = Player.get_exclusive_collision_layer()
 
-func _ready():
+export var block_n : int
+export var area : int
+export var spawn_offset : float
+
+var blocks_left = 100
+
+func _ready ():
+	blocks_left = block_n
+	
+	while blocks_left > 0:
+		var b = block_prefab.instance()
+		add_child(b)
+		b.global_position = Vector2(spawn_offset + 122 * ( randi() % area), -2000 - 200 * (blocks_left))
+		blocks_left = blocks_left - 1
+	
 	call_deferred("register_all_blocks")
+
 
 func _physics_process(delta):
 	
@@ -39,8 +61,10 @@ func _physics_process(delta):
 		block.throw_time += delta
 		block.cur_velocity = new_velocity
 		
-		if (check_inner(block, 30)):
-			print("AAAAA")
+		if (check_inner(block, 50)):
+			block.global_position = Vector2(spawn_offset + 122 * ( randi() % area), -2000 - 5000)
+			block.cur_velocity = Vector2()
+			continue
 			
 		var delta_pos = new_position - block.position; 
 
@@ -133,7 +157,7 @@ func check_cast_x(result : Dictionary, block : Block) -> bool:
 		var p = result.position
 		var sgn = -1 if p.x > block.global_position.x else 1
 		block.global_position.x = p.x + sgn * block.size.x
-		emit_signal("blocks_collided", Vector2(1, 0))
+		emit_signal("blocks_collided", Vector2(1, 0), block.global_position)
 		return true
 	return false
 
@@ -143,7 +167,7 @@ func check_cast_y(result : Dictionary, block : Block) -> bool:
 		var p = result.position
 		var sgn = -1 if p.y > block.global_position.y else 1
 		block.global_position.y = p.y + sgn * block.size.y
-		emit_signal("blocks_collided", Vector2(0, 1))
+		emit_signal("blocks_collided", Vector2(0, 1), block.global_position)
 		return true
 		
 	return false
