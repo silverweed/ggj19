@@ -22,6 +22,8 @@ var grab_time
 onready var owner_id = get_parent().id
 onready var front_grab_pos = get_node("../FrontGrabPos").position
 onready var down_grab_pos = get_node("../DownGrabPos").position
+var grabbing_position
+
 
 func _draw():
 	var axis = Vector2(
@@ -42,13 +44,18 @@ func _process(delta):
 		var interpolant = min(1, grab_time/grab_anim)
 		grab_time += delta
 		
-		var pos = global_position.linear_interpolate(get_node("../BlockCarryingPos").global_position, interpolant)
+		
+		var grabbing_pos = grabbing_position + owner.global_position
+		var pos = grabbing_pos.linear_interpolate(get_node("../BlockCarryingPos").global_position, interpolant)
 		carried_block.global_position = pos
 	
-	if is_looking_down():
-		position = down_grab_pos
+	if !carried_block:
+		if is_looking_down():
+			position = down_grab_pos
+		else:
+			position = front_grab_pos
 	else:
-		position = front_grab_pos
+		position = Vector2(0 , -1000)
 		
 
 func _input(event):	
@@ -74,6 +81,7 @@ func _input(event):
 			carried_block.set_collider_disabled(true)
 			block_system.awake(carried_block)
 			grabbable_block = null
+			grabbing_position = position
 
 	
 func calc_throw_vector() -> Vector2:
