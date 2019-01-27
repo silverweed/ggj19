@@ -1,13 +1,29 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://menu/sprites/main_menu_background.png" type="Texture" id=2]
-[ext_resource path="res://menu/sprites/main_menu_mountains.png" type="Texture" id=3]
-[ext_resource path="res://fonts/ImperialOne.otf" type="DynamicFontData" id=4]
-[ext_resource path="res://menu/sounds/UIOK.ogg" type="AudioStream" id=5]
+[ext_resource path="res://block/sprites/block_standard.png" type="Texture" id=3]
+[ext_resource path="res://block/sprites/block_annoyed.png" type="Texture" id=4]
+[ext_resource path="res://menu/sprites/main_menu_mountains.png" type="Texture" id=5]
+[ext_resource path="res://block/sprites/block_dummy.png" type="Texture" id=6]
+[ext_resource path="res://block/sprites/block_angry.png" type="Texture" id=7]
+[ext_resource path="res://menu/sprites/game_logo.png" type="Texture" id=8]
+[ext_resource path="res://fonts/ImperialOne.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://menu/sounds/UIOK.ogg" type="AudioStream" id=10]
+[ext_resource path="res://level/Sun.tscn" type="PackedScene" id=11]
 
-[sub_resource type="StyleBoxEmpty" id=1]
+[sub_resource type="ParticlesMaterial" id=1]
 
+emission_shape = 2
+emission_box_extents = Vector3( 1, 960, 1 )
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 150.0
+angular_velocity = 200.0
+angular_velocity_random = 0.3
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
 
 [sub_resource type="StyleBoxEmpty" id=2]
 
@@ -18,20 +34,23 @@
 [sub_resource type="StyleBoxEmpty" id=4]
 
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="StyleBoxEmpty" id=5]
 
-size = 110
+
+[sub_resource type="DynamicFont" id=6]
+
+size = 90
 outline_size = 8
 outline_color = Color( 0.0235294, 0.0352941, 0.0862745, 1 )
-font_data = ExtResource( 4 )
-
-[sub_resource type="StyleBoxEmpty" id=6]
-
+font_data = ExtResource( 9 )
 
 [sub_resource type="StyleBoxEmpty" id=7]
 
 
 [sub_resource type="StyleBoxEmpty" id=8]
+
+
+[sub_resource type="StyleBoxEmpty" id=9]
 
 
 [node name="Menu" type="Control"]
@@ -44,46 +63,81 @@ margin_right = 40.0
 margin_bottom = 40.0
 texture = ExtResource( 2 )
 
+[node name="Particles2D" type="Particles2D" parent="."]
+position = Vector2( 960, -199.043 )
+rotation = 1.5708
+amount = 4
+lifetime = 10.0
+process_material = SubResource( 1 )
+texture = ExtResource( 3 )
+
+[node name="Particles2D2" type="Particles2D" parent="."]
+position = Vector2( 960, -199.043 )
+rotation = 1.5708
+amount = 1
+lifetime = 10.0
+process_material = SubResource( 1 )
+texture = ExtResource( 4 )
+
 [node name="BgFg" type="TextureRect" parent="."]
 margin_top = 55.9998
 margin_right = 1920.0
 margin_bottom = 1080.0
-texture = ExtResource( 3 )
+texture = ExtResource( 5 )
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Particles2D3" type="Particles2D" parent="."]
+position = Vector2( 960, -199.043 )
+rotation = 1.5708
+amount = 1
+lifetime = 10.0
+process_material = SubResource( 1 )
+texture = ExtResource( 6 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+[node name="Particles2D4" type="Particles2D" parent="."]
+position = Vector2( 960, -199.043 )
+rotation = 1.5708
+amount = 1
+lifetime = 10.0
+process_material = SubResource( 1 )
+texture = ExtResource( 7 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 448.0
+margin_top = 112.198
+margin_right = 1472.0
+margin_bottom = 368.198
+texture = ExtResource( 8 )
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
 margin_left = 804.0
-margin_top = 401.0
+margin_top = 769.198
 margin_right = 1115.0
-margin_bottom = 679.0
+margin_bottom = 1047.2
 
-[node name="Play" type="Button" parent="CenterContainer/VBoxContainer"]
+[node name="Play" type="Button" parent="VBoxContainer"]
 margin_right = 311.0
-margin_bottom = 137.0
+margin_bottom = 113.0
 rect_pivot_offset = Vector2( 156, 68 )
-custom_styles/hover = SubResource( 1 )
-custom_styles/pressed = SubResource( 2 )
-custom_styles/focus = SubResource( 3 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Play"
 
-[node name="Ok" type="AudioStreamPlayer" parent="CenterContainer/VBoxContainer/Play"]
-stream = ExtResource( 5 )
+[node name="Ok" type="AudioStreamPlayer" parent="VBoxContainer/Play"]
+stream = ExtResource( 10 )
 
-[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 141.0
+[node name="Quit" type="Button" parent="VBoxContainer"]
+margin_top = 117.0
 margin_right = 311.0
-margin_bottom = 278.0
-rect_pivot_offset = Vector2( 156, 68 )
-custom_styles/hover = SubResource( 6 )
-custom_styles/pressed = SubResource( 7 )
-custom_styles/focus = SubResource( 8 )
-custom_styles/normal = SubResource( 4 )
-custom_fonts/font = SubResource( 5 )
+margin_bottom = 230.0
+rect_pivot_offset = Vector2( 157, 68 )
+custom_styles/hover = SubResource( 7 )
+custom_styles/pressed = SubResource( 8 )
+custom_styles/focus = SubResource( 9 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
 text = "Quit"
 
 [node name="Credits" type="Label" parent="."]
@@ -97,13 +151,16 @@ margin_right = -5.79907
 margin_bottom = -6.99023
 text = "\"Splat\" sound adapted from https://freesound.org/people/FoolBoyMedia/sounds/237928/"
 
-[connection signal="focus_entered" from="CenterContainer/VBoxContainer/Play" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Play", true ]]
-[connection signal="focus_exited" from="CenterContainer/VBoxContainer/Play" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Play", false ]]
-[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Play" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Play", true ]]
-[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Play" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Play", false ]]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Play" to="." method="_on_Play_pressed"]
-[connection signal="focus_entered" from="CenterContainer/VBoxContainer/Quit" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Quit", true ]]
-[connection signal="focus_exited" from="CenterContainer/VBoxContainer/Quit" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Quit", false ]]
-[connection signal="mouse_entered" from="CenterContainer/VBoxContainer/Quit" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Quit", true ]]
-[connection signal="mouse_exited" from="CenterContainer/VBoxContainer/Quit" to="." method="set_expanded" binds= [ "CenterContainer/VBoxContainer/Quit", false ]]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
+[node name="Sun" parent="." instance=ExtResource( 11 )]
+position = Vector2( 960, 540 )
+
+[connection signal="focus_entered" from="VBoxContainer/Play" to="." method="set_expanded" binds= [ "VBoxContainer/Play", true ]]
+[connection signal="focus_exited" from="VBoxContainer/Play" to="." method="set_expanded" binds= [ "VBoxContainer/Play", false ]]
+[connection signal="mouse_entered" from="VBoxContainer/Play" to="." method="set_expanded" binds= [ "VBoxContainer/Play", true ]]
+[connection signal="mouse_exited" from="VBoxContainer/Play" to="." method="set_expanded" binds= [ "VBoxContainer/Play", false ]]
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="focus_entered" from="VBoxContainer/Quit" to="." method="set_expanded" binds= [ "VBoxContainer/Quit", true ]]
+[connection signal="focus_exited" from="VBoxContainer/Quit" to="." method="set_expanded" binds= [ "VBoxContainer/Quit", false ]]
+[connection signal="mouse_entered" from="VBoxContainer/Quit" to="." method="set_expanded" binds= [ "VBoxContainer/Quit", true ]]
+[connection signal="mouse_exited" from="VBoxContainer/Quit" to="." method="set_expanded" binds= [ "VBoxContainer/Quit", false ]]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

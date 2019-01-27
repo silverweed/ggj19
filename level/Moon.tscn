@@ -1,8 +1,27 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://level/sprites/moon_eyes_animation.png" type="Texture" id=1]
 [ext_resource path="res://level/Moon.gd" type="Script" id=2]
 [ext_resource path="res://level/sprites/SunMoon.tres" type="Animation" id=3]
+[ext_resource path="res://level/sprites/glow.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+
+resource_name = "pulse"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Halo:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1, 1 ), Vector2( 1.2, 1.2 ) ]
+}
 
 [node name="Moon" type="Sprite"]
 texture = ExtResource( 1 )
@@ -17,5 +36,15 @@ anims/idle = ExtResource( 3 )
 [node name="Timer" type="Timer" parent="."]
 wait_time = 3.0
 autostart = true
+
+[node name="Halo" type="Sprite" parent="."]
+self_modulate = Color( 0.560784, 0.796078, 0.968627, 0.776471 )
+show_behind_parent = true
+scale = Vector2( 1.19858, 1.19858 )
+texture = ExtResource( 4 )
+
+[node name="HaloAnimPlayer" type="AnimationPlayer" parent="."]
+playback_speed = 0.5
+anims/pulse = SubResource( 1 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
