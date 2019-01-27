@@ -34,8 +34,8 @@ tracks/0/keys = {
 }
 
 [node name="Block" type="KinematicBody2D" groups=[
-"blocks",
 "hurting_player",
+"blocks",
 ]]
 script = ExtResource( 1 )
 

@@ -14,5 +14,8 @@ func _ready():
 
 func on_blocks_collided(ignore_direction : Vector2, pos : Vector2):
 	var expl = ExplFX.instance()
-	expl.global_position = pos
+	expl.play("default")
 	add_child(expl)
+	expl.global_position = pos
+	var s = rand_range(6, 9)
+	expl.scale = Vector2(s, s)
