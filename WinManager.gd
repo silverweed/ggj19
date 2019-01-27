@@ -17,3 +17,6 @@ func on_player_won(id):
 		
 	accept_win = false
 	self.get_tree().paused = true
+	#show menu
+	#self.WinMenu.position = Vector2(100,100)
+	

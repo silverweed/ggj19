@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="ggj19"
-run/main_scene="res://tests/TestMap.tscn"
+run/main_scene="res://menu/Menu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
