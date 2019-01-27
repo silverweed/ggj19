@@ -90,6 +90,18 @@ playing = true
 position = Vector2( -0.417132, -0.417132 )
 shape = SubResource( 2 )
 
+[node name="BlockCarryingPos" type="Position2D" parent="."]
+position = Vector2( 0.174201, -92.5745 )
+scale = Vector2( 1, 1 )
+
+[node name="FrontGrabPos" type="Position2D" parent="."]
+position = Vector2( 68.9999, 0.0273743 )
+scale = Vector2( 1, 1 )
+
+[node name="DownGrabPos" type="Position2D" parent="."]
+position = Vector2( 0.174201, 84.2867 )
+scale = Vector2( 1, 1 )
+
 [node name="GrabBlockArea" type="Area2D" parent="."]
 position = Vector2( 69.3748, 0 )
 script = ExtResource( 25 )
@@ -97,9 +109,6 @@ script = ExtResource( 25 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrabBlockArea"]
 position = Vector2( 0.439095, 0.439061 )
 shape = SubResource( 3 )
-
-[node name="BlockCarryingPos" type="Position2D" parent="GrabBlockArea"]
-position = Vector2( -69.2006, -92.5745 )
 
 [node name="PickUp" type="AudioStreamPlayer" parent="GrabBlockArea"]
 stream = ExtResource( 26 )

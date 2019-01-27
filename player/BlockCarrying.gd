@@ -17,7 +17,8 @@ var offset = 100
 var recoil = 3000
 
 onready var owner_id = get_parent().id
-
+onready var front_grab_pos = get_node("../FrontGrabPos").position
+onready var down_grab_pos = get_node("../DownGrabPos").position
 
 func _draw():
 	var axis = Vector2(
@@ -32,15 +33,18 @@ func _draw():
 func _process(delta):
 	update()
 	if carried_block:
-		carried_block.global_position = $BlockCarryingPos.global_position
+		carried_block.global_position = get_node("../BlockCarryingPos").global_position
 		carried_block.set_collider_disabled(true)
+	
+	if is_looking_down():
+		position = down_grab_pos
+	else:
+		position = front_grab_pos
 		
 
 func _input(event):	
-	
 	if event.is_action_pressed("throw_block_" + str(owner_id)):
 		if carried_block:
-		
 			var throw_dir = calc_throw_vector() 
 			carried_block.set_collider_disabled(false)
 			carried_block.disable_main_collider_for(BLOCK_CLD_DISABLE_TIME_AFTER_THROW)
@@ -110,3 +114,7 @@ func _on_GrabBlockArea_body_entered(body):
 func _on_GrabBlockArea_body_exited(body):
 	if body == grabbable_block:
 		grabbable_block = null
+		
+
+func is_looking_down() -> bool:
+	return Input.get_action_strength("move_down_" + str(owner_id)) > THROW_AXIS_DEADZONE
