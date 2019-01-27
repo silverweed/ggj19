@@ -61,6 +61,9 @@ func _physics_process(delta):
 		block.throw_time += delta
 		block.cur_velocity = new_velocity
 		
+		# sanity checks
+		awake(block)
+		
 		if (check_inner(block, 50)):
 			emit_signal("block_destroyed", block.global_position)
 			block.global_position = Vector2(spawn_offset + 122 * ( randi() % area), -2000 - 5000)
@@ -199,9 +202,29 @@ func set_block_as_sleeping(block : Block):
 	assert(block in travelling_blocks)
 	assert(!(block in sleeping_blocks))
 	
-	travelling_blocks.erase(block)
-	sleeping_blocks.append(block)
+	var center = block.global_position;
+	var shift = Vector2( 0, block.size.y + 10)
 	
+	var space_rid = get_world_2d().space
+	var space_state = Physics2DServer.space_get_direct_state(space_rid)
+	
+	var result = space_state.intersect_ray(center, center + shift, [block], block_cl)
+	if result.empty():
+		emit_signal("block_destroyed", block.global_position)
+		block.global_position = Vector2(spawn_offset + 122 * ( randi() % area), -2000 - 5000)
+		block.cur_velocity = Vector2()
+	else:
+		travelling_blocks.erase(block)
+		sleeping_blocks.append(block)
+
+func awake(block: Block):
+	for area in block.vert_collider.get_overlapping_areas():
+		var other = area.get_parent().get_parent()
+		if other.is_in_group("blocks") and other.global_position.y < block.global_position.y:
+			if is_sleeping(other):
+				other.cur_velocity = Vector2(0, 10)
+				other.throw_time = 0
+				set_block_as_travelling(other)
 	
 
 func is_sleeping(block : Block) -> bool:

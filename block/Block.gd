@@ -86,11 +86,12 @@ func experimental_collision() -> bool:
 	
 	
 func can_be_grabbed() -> bool:
-	for area in vert_collider.get_overlapping_areas():
-		var other = area.get_parent().get_parent()
-		if other.is_in_group("blocks") and other.global_position.y < global_position.y:
-			return false
+	#for area in vert_collider.get_overlapping_areas():
+	#	var other = area.get_parent().get_parent()
+	#	if other.is_in_group("blocks") and other.global_position.y < global_position.y:
+	#		return false
 	return true
+	
 
 func set_collider_disabled(is_disabled):
 	vert_collider.get_node("CollisionShape2D").disabled = is_disabled
