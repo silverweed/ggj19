@@ -18,6 +18,9 @@ var jump_count = 0
 var time_since_last_jump = 0
 var jumped_last_frame = false
 
+var airborne = false
+var facing = 1
+
 var velocity = Vector2()
 
 const MAX_ACCELERATION = 10
@@ -60,6 +63,9 @@ func _physics_process(delta):
 	if is_on_floor():
 		velocity.y = 0
 		jump_count = 0
+		airborne = false 
+	else: 
+		airborne = true
 	
 	flip_player_when_direction_changes()
 		
@@ -91,6 +97,7 @@ func flip_player_when_direction_changes():
 	if velocity.x != 0:
 		if sign(velocity.x) != sign(prev_velocity.x):
 			scale.x *= -1
+			facing *= -1
 		prev_velocity = velocity
 		
 		

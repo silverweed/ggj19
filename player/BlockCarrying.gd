@@ -13,12 +13,20 @@ var carried_block : Block = null
 var block_system = null
 
 var throw_impulse = 4000
+var offset = 100
+var recoil = 3000
 
 onready var owner_id = get_parent().id
 
 
 func _draw():
-	draw_line(Vector2(), calc_throw_vector(), Color.red)
+	var axis = Vector2(
+	Input.get_action_strength("aim_right_" + str(owner_id)) - \
+		Input.get_action_strength("aim_left_" + str(owner_id)), \
+		Input.get_action_strength("aim_down_" + str(owner_id)) - \
+		Input.get_action_strength("aim_up_" + str(owner_id))
+		)
+	#draw_line(Vector2(), 100 * axis + Vector2(10, 10), Color.red)
 	
 	
 func _process(delta):
@@ -33,10 +41,15 @@ func _input(event):
 	if event.is_action_pressed("throw_block_" + str(owner_id)):
 		if carried_block:
 		
+			var throw_dir = calc_throw_vector() 
 			carried_block.set_collider_disabled(false)
 			carried_block.disable_main_collider_for(BLOCK_CLD_DISABLE_TIME_AFTER_THROW)
-			carried_block.throw(calc_throw_vector())
+			carried_block.throw(throw_dir * throw_impulse)
+			carried_block.global_position += throw_dir * offset
 			carried_block = null
+			if owner.airborne:
+				owner.velocity -= throw_dir * recoil
+				owner.global_position -= throw_dir * offset
 			$Throw.play()
 		
 		elif grabbable_block:
@@ -57,9 +70,10 @@ func calc_throw_vector() -> Vector2:
 		)
 	
 	if axis.length_squared() < THROW_AXIS_DEADZONE:
-		return Vector2(sign(scale.x), -0.2).normalized() * throw_impulse
+		return Vector2(sign(owner.facing), -0.1).normalized()
 
-	return axis.normalized() * throw_impulse
+	axis += Vector2(0, -0.2)
+	return axis.normalized()
 	
 func calc_throw_vector_alternative():
 #	var mouse_pos = get_global_mouse_position()
