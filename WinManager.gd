@@ -12,6 +12,7 @@ func _ready():
 func _input(event):
 	if !accept_win and event.is_action_pressed("restart"):
 		get_tree().paused = false
+		main_theme.play()
 		get_tree().change_scene_to(preload("res://tests/TestMap.tscn"))
 	
 	
