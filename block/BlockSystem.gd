@@ -61,15 +61,17 @@ func _physics_process(delta):
 		block.throw_time += delta
 		block.cur_velocity = new_velocity
 		
-		if (check_inner(block, 30)):
-			print("AAAAA")
+		if (check_inner(block, 50)):
+			block.global_position = Vector2(spawn_offset + 122 * ( randi() % area), -2000 - 5000)
+			block.cur_velocity = Vector2()
+			continue
 			
 		var delta_pos = new_position - block.position; 
 
 		block.position.x += delta_pos.x
 		
-		#if collision_x(block, delta_pos.x): #block_colliding_horizontally(block):
-		#	block.cur_velocity.x = 0
+		if collision_x(block, delta_pos.x): #block_colliding_horizontally(block):
+			block.cur_velocity.x = 0
 
 		block.position.y += delta_pos.y
 		if collision_y(block, delta_pos.y):
