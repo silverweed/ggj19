@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://level/UI.gd" type="Script" id=1]
+[ext_resource path="res://fonts/ImperialOne.otf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+
+size = 40
+outline_size = 2
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 2 )
+
+[node name="UI" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+margin_bottom = 127.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer"]
+margin_left = 691.0
+margin_top = 11.0
+margin_right = 1228.0
+margin_bottom = 116.0
+size_flags_horizontal = 3
+
+[node name="P0Kills" type="Label" parent="CenterContainer/HBoxContainer"]
+margin_right = 182.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+text = "Kills: 0
+"
+align = 2
+
+[node name="Dummy" type="Label" parent="CenterContainer/HBoxContainer"]
+margin_left = 186.0
+margin_top = 27.0
+margin_right = 351.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+text = "           "
+
+[node name="P1Kills" type="Label" parent="CenterContainer/HBoxContainer"]
+margin_left = 355.0
+margin_right = 537.0
+margin_bottom = 105.0
+size_flags_horizontal = 3
+custom_fonts/font = SubResource( 1 )
+text = "Kills: 0
+"
+

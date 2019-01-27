@@ -1,18 +1,19 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://level/Sky.tscn" type="PackedScene" id=1]
 [ext_resource path="res://level/Walls.tscn" type="PackedScene" id=2]
 [ext_resource path="res://house/House.tscn" type="PackedScene" id=3]
 [ext_resource path="res://level/Ground.tscn" type="PackedScene" id=4]
-[ext_resource path="res://block/BlockSystem.tscn" type="PackedScene" id=5]
-[ext_resource path="res://effects/ScreenshakeListener.tscn" type="PackedScene" id=6]
-[ext_resource path="res://effects/ScreenShakeSystem.tscn" type="PackedScene" id=7]
-[ext_resource path="res://player/PlayerManager.tscn" type="PackedScene" id=8]
-[ext_resource path="res://effects/FXSystem.tscn" type="PackedScene" id=9]
-[ext_resource path="res://sounds/SoundSystem.tscn" type="PackedScene" id=10]
-[ext_resource path="res://menu/PauseMenu.tscn" type="PackedScene" id=11]
-[ext_resource path="res://menu/PauseMenu.gd" type="Script" id=12]
-[ext_resource path="res://WinManager.tscn" type="PackedScene" id=13]
+[ext_resource path="res://level/UI.tscn" type="PackedScene" id=5]
+[ext_resource path="res://block/BlockSystem.tscn" type="PackedScene" id=6]
+[ext_resource path="res://effects/ScreenshakeListener.tscn" type="PackedScene" id=7]
+[ext_resource path="res://effects/ScreenShakeSystem.tscn" type="PackedScene" id=8]
+[ext_resource path="res://player/PlayerManager.tscn" type="PackedScene" id=9]
+[ext_resource path="res://effects/FXSystem.tscn" type="PackedScene" id=10]
+[ext_resource path="res://sounds/SoundSystem.tscn" type="PackedScene" id=11]
+[ext_resource path="res://menu/PauseMenu.tscn" type="PackedScene" id=12]
+[ext_resource path="res://menu/PauseMenu.gd" type="Script" id=13]
+[ext_resource path="res://WinManager.tscn" type="PackedScene" id=14]
 
 [node name="TestMap" type="Node2D"]
 position = Vector2( 256, -14.3575 )
@@ -46,18 +47,22 @@ zoom = Vector2( 1.5, 1.5 )
 drag_margin_h_enabled = false
 drag_margin_v_enabled = false
 
-[node name="BlockSystem" parent="." instance=ExtResource( 5 )]
+[node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
+
+[node name="UI" parent="Camera2D/CanvasLayer" instance=ExtResource( 5 )]
+
+[node name="BlockSystem" parent="." instance=ExtResource( 6 )]
 block_n = 50
 spawn_offset = -451.0
 
-[node name="ScreenshakeListener" parent="." instance=ExtResource( 6 )]
+[node name="ScreenshakeListener" parent="." instance=ExtResource( 7 )]
 block_system_path = NodePath("../BlockSystem")
 screenshake_system_path = NodePath("../ScreenShakeSystem")
 
-[node name="ScreenShakeSystem" parent="." instance=ExtResource( 7 )]
+[node name="ScreenShakeSystem" parent="." instance=ExtResource( 8 )]
 camera_path = NodePath("../Camera2D")
 
-[node name="PlayerManager" parent="." instance=ExtResource( 8 )]
+[node name="PlayerManager" parent="." instance=ExtResource( 9 )]
 spawn_point_0_path = NodePath("SpawnPoint0")
 spawn_point_1_path = NodePath("SpawnPoint1")
 block_system_path = NodePath("../BlockSystem")
@@ -71,20 +76,20 @@ position = Vector2( 1490.12, -1827 )
 [node name="Node2D" type="Node2D" parent="."]
 position = Vector2( -700, 0 )
 
-[node name="FXSystem" parent="." instance=ExtResource( 9 )]
+[node name="FXSystem" parent="." instance=ExtResource( 10 )]
 block_system_path = NodePath("../BlockSystem")
 
-[node name="SoundSystem" parent="." instance=ExtResource( 10 )]
+[node name="SoundSystem" parent="." instance=ExtResource( 11 )]
 block_system_path = NodePath("../BlockSystem")
 
-[node name="PauseMenu" parent="." instance=ExtResource( 11 )]
+[node name="PauseMenu" parent="." instance=ExtResource( 12 )]
 pause_mode = 2
 visible = false
 margin_left = -751.287
 margin_top = -2018.51
 margin_right = -751.287
 margin_bottom = -2018.51
-script = ExtResource( 12 )
+script = ExtResource( 13 )
 
-[node name="WinManager" parent="." instance=ExtResource( 13 )]
+[node name="WinManager" parent="." instance=ExtResource( 14 )]
 
