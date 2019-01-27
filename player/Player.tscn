@@ -5,25 +5,25 @@
 [ext_resource path="res://player/sprites/player_anim/player_idle0001.png" type="Texture" id=3]
 [ext_resource path="res://player/sprites/player_anim/player_idle0002.png" type="Texture" id=4]
 [ext_resource path="res://player/sprites/player_anim/player_idle0003.png" type="Texture" id=5]
-[ext_resource path="res://player/sprites/player_anim/player_grab0004.png" type="Texture" id=6]
-[ext_resource path="res://player/sprites/player_anim/player_grab0005.png" type="Texture" id=7]
-[ext_resource path="res://player/sprites/player_anim/player_jump0000.png" type="Texture" id=8]
-[ext_resource path="res://player/sprites/player_anim/player_jump0001.png" type="Texture" id=9]
-[ext_resource path="res://player/sprites/player_anim/player_jump0002.png" type="Texture" id=10]
-[ext_resource path="res://player/sprites/player_anim/player_jump0003.png" type="Texture" id=11]
-[ext_resource path="res://player/sprites/player_anim/player_jump0004.png" type="Texture" id=12]
-[ext_resource path="res://player/sprites/player_anim/player_grab0000.png" type="Texture" id=13]
-[ext_resource path="res://player/sprites/player_anim/player_grab0001.png" type="Texture" id=14]
-[ext_resource path="res://player/sprites/player_anim/player_grab0002.png" type="Texture" id=15]
-[ext_resource path="res://player/sprites/player_anim/player_grab0003.png" type="Texture" id=16]
-[ext_resource path="res://player/sprites/player_anim/player_walk0001.png" type="Texture" id=17]
-[ext_resource path="res://player/sprites/player_anim/player_walk0002.png" type="Texture" id=18]
-[ext_resource path="res://player/sprites/player_anim/player_walk0003.png" type="Texture" id=19]
-[ext_resource path="res://player/sprites/player_anim/player_walk0000.png" type="Texture" id=20]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0000.png" type="Texture" id=21]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0001.png" type="Texture" id=22]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0002.png" type="Texture" id=23]
-[ext_resource path="res://player/sprites/player_anim/player_walk_grab0003.png" type="Texture" id=24]
+[ext_resource path="res://player/sprites/player_anim/player_grab0000.png" type="Texture" id=6]
+[ext_resource path="res://player/sprites/player_anim/player_grab0001.png" type="Texture" id=7]
+[ext_resource path="res://player/sprites/player_anim/player_grab0002.png" type="Texture" id=8]
+[ext_resource path="res://player/sprites/player_anim/player_grab0003.png" type="Texture" id=9]
+[ext_resource path="res://player/sprites/player_anim/player_walk0001.png" type="Texture" id=10]
+[ext_resource path="res://player/sprites/player_anim/player_walk0002.png" type="Texture" id=11]
+[ext_resource path="res://player/sprites/player_anim/player_walk0003.png" type="Texture" id=12]
+[ext_resource path="res://player/sprites/player_anim/player_walk0000.png" type="Texture" id=13]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0000.png" type="Texture" id=14]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0001.png" type="Texture" id=15]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0002.png" type="Texture" id=16]
+[ext_resource path="res://player/sprites/player_anim/player_walk_grab0003.png" type="Texture" id=17]
+[ext_resource path="res://player/sprites/player_anim/player_grab0004.png" type="Texture" id=18]
+[ext_resource path="res://player/sprites/player_anim/player_grab0005.png" type="Texture" id=19]
+[ext_resource path="res://player/sprites/player_anim/player_jump0000.png" type="Texture" id=20]
+[ext_resource path="res://player/sprites/player_anim/player_jump0001.png" type="Texture" id=21]
+[ext_resource path="res://player/sprites/player_anim/player_jump0002.png" type="Texture" id=22]
+[ext_resource path="res://player/sprites/player_anim/player_jump0003.png" type="Texture" id=23]
+[ext_resource path="res://player/sprites/player_anim/player_jump0004.png" type="Texture" id=24]
 [ext_resource path="res://player/BlockCarrying.gd" type="Script" id=25]
 [ext_resource path="res://player/sounds/lift.ogg" type="AudioStream" id=26]
 [ext_resource path="res://player/sounds/throw.ogg" type="AudioStream" id=27]
@@ -38,35 +38,36 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 6 ), ExtResource( 7 ) ],
-"loop": true,
-"name": "throw",
-"speed": 5.0
-}, {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
-"loop": true,
-"name": "jump",
-"speed": 8.0
-}, {
-"frames": [ ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ) ],
 "loop": true,
 "name": "grab",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ) ],
+"frames": [ ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "walk",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"frames": [ ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ) ],
 "loop": true,
 "name": "walk_grab",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": true,
+"name": "throw",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ) ],
+"loop": true,
+"name": "jump",
+"speed": 8.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="CapsuleShape2D" id=2]
 
-extents = Vector2( 33.7545, 47.0304 )
+radius = 30.1225
+height = 45.326
 
 [sub_resource type="RectangleShape2D" id=3]
 
@@ -84,6 +85,7 @@ rotation = -3.14159
 scale = Vector2( 2, -1.92323 )
 frames = SubResource( 1 )
 animation = "idle"
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -92,15 +94,12 @@ shape = SubResource( 2 )
 
 [node name="BlockCarryingPos" type="Position2D" parent="."]
 position = Vector2( 0.174201, -92.5745 )
-scale = Vector2( 1, 1 )
 
 [node name="FrontGrabPos" type="Position2D" parent="."]
 position = Vector2( 68.9999, 0.0273743 )
-scale = Vector2( 1, 1 )
 
 [node name="DownGrabPos" type="Position2D" parent="."]
 position = Vector2( 0.174201, 84.2867 )
-scale = Vector2( 1, 1 )
 
 [node name="GrabBlockArea" type="Area2D" parent="."]
 position = Vector2( 69.3748, 0 )
