@@ -43,19 +43,27 @@ text = "PAUSED"
 position = Vector2( 960, 540 )
 
 [node name="Star" parent="." instance=ExtResource( 4 )]
-position = Vector2( 469.3, 399.95 )
+position = Vector2( 469.3, 399 )
+scale = Vector2( 1.12, 1.12 )
+
+[node name="Star7" parent="." instance=ExtResource( 4 )]
+position = Vector2( 613.7, 515.85 )
+scale = Vector2( 0.400002, 0.400002 )
 
 [node name="Star2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 629.851, 780.901 )
+scale = Vector2( 0.679998, 0.679998 )
 
 [node name="Star3" parent="." instance=ExtResource( 4 )]
-position = Vector2( 1316.7, 441.75 )
+position = Vector2( 1317.65, 441.75 )
+scale = Vector2( 0.840005, 0.840005 )
 
 [node name="Star4" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1620.7, 238.45 )
 
 [node name="Star5" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1639.7, 729.601 )
+scale = Vector2( 0.48, 0.48 )
 
 [node name="Star6" parent="." instance=ExtResource( 4 )]
 position = Vector2( 1187.5, 718.201 )
