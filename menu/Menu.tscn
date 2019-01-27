@@ -64,7 +64,7 @@ margin_bottom = 40.0
 texture = ExtResource( 2 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
-position = Vector2( 960, -199.043 )
+position = Vector2( 960, -92.9051 )
 rotation = 1.5708
 amount = 4
 lifetime = 10.0
@@ -72,7 +72,7 @@ process_material = SubResource( 1 )
 texture = ExtResource( 3 )
 
 [node name="Particles2D2" type="Particles2D" parent="."]
-position = Vector2( 960, -199.043 )
+position = Vector2( 960, -91.7387 )
 rotation = 1.5708
 amount = 1
 lifetime = 10.0
@@ -86,7 +86,7 @@ margin_bottom = 1080.0
 texture = ExtResource( 5 )
 
 [node name="Particles2D3" type="Particles2D" parent="."]
-position = Vector2( 960, -199.043 )
+position = Vector2( 960, -91.7387 )
 rotation = 1.5708
 amount = 1
 lifetime = 10.0
@@ -94,7 +94,7 @@ process_material = SubResource( 1 )
 texture = ExtResource( 6 )
 
 [node name="Particles2D4" type="Particles2D" parent="."]
-position = Vector2( 960, -199.043 )
+position = Vector2( 960, -91.7387 )
 rotation = 1.5708
 amount = 1
 lifetime = 10.0

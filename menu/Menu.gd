@@ -4,7 +4,7 @@ const MAIN_SCENE = preload("res://tests/TestMap.tscn")
 
 
 func set_expanded(node_path : String, expand : bool):
-	var a = 1.3 if expand else 1
+	var a = 1.3 if expand else 1.0
 	var ctrl = get_node(node_path)
 	ctrl.rect_scale = Vector2(a, a)
 
