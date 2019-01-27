@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://menu/Menu.gd" type="Script" id=1]
 [ext_resource path="res://menu/sprites/main_menu_background.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://fonts/ImperialOne.otf" type="DynamicFontData" id=9]
 [ext_resource path="res://menu/sounds/UIOK.ogg" type="AudioStream" id=10]
 [ext_resource path="res://level/Sun.tscn" type="PackedScene" id=11]
+[ext_resource path="res://menu/Credits.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ParticlesMaterial" id=1]
 
@@ -39,7 +40,7 @@ orbit_velocity_random = 0.0
 
 [sub_resource type="DynamicFont" id=6]
 
-size = 90
+size = 50
 outline_size = 8
 outline_color = Color( 0.0235294, 0.0352941, 0.0862745, 1 )
 font_data = ExtResource( 9 )
@@ -103,21 +104,26 @@ texture = ExtResource( 7 )
 
 [node name="TextureRect" type="TextureRect" parent="."]
 margin_left = 448.0
-margin_top = 112.198
+margin_top = 74.7063
 margin_right = 1472.0
-margin_bottom = 368.198
+margin_bottom = 330.706
 texture = ExtResource( 8 )
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 804.0
-margin_top = 769.198
-margin_right = 1115.0
-margin_bottom = 1047.2
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -216.0
+margin_top = -278.581
+margin_right = 216.0
+margin_bottom = 68.4186
 
 [node name="Play" type="Button" parent="VBoxContainer"]
-margin_right = 311.0
-margin_bottom = 113.0
-rect_pivot_offset = Vector2( 156, 68 )
+editor/display_folded = true
+margin_right = 432.0
+margin_bottom = 62.0
+rect_pivot_offset = Vector2( 216, 50 )
 custom_styles/hover = SubResource( 2 )
 custom_styles/pressed = SubResource( 3 )
 custom_styles/focus = SubResource( 4 )
@@ -128,11 +134,27 @@ text = "Play"
 [node name="Ok" type="AudioStreamPlayer" parent="VBoxContainer/Play"]
 stream = ExtResource( 10 )
 
+[node name="Credits" type="Button" parent="VBoxContainer"]
+editor/display_folded = true
+margin_top = 66.0
+margin_right = 432.0
+margin_bottom = 128.0
+rect_pivot_offset = Vector2( 216, 50 )
+custom_styles/hover = SubResource( 2 )
+custom_styles/pressed = SubResource( 3 )
+custom_styles/focus = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+custom_fonts/font = SubResource( 6 )
+text = "Credits"
+
+[node name="Ok" type="AudioStreamPlayer" parent="VBoxContainer/Credits"]
+stream = ExtResource( 10 )
+
 [node name="Quit" type="Button" parent="VBoxContainer"]
-margin_top = 117.0
-margin_right = 311.0
-margin_bottom = 230.0
-rect_pivot_offset = Vector2( 157, 68 )
+margin_top = 132.0
+margin_right = 432.0
+margin_bottom = 194.0
+rect_pivot_offset = Vector2( 216, 50 )
 custom_styles/hover = SubResource( 7 )
 custom_styles/pressed = SubResource( 8 )
 custom_styles/focus = SubResource( 9 )
@@ -154,11 +176,17 @@ text = "\"Splat\" sound adapted from https://freesound.org/people/FoolBoyMedia/s
 [node name="Sun" parent="." instance=ExtResource( 11 )]
 position = Vector2( 960, 540 )
 
+[node name="CreditsScreen" parent="." instance=ExtResource( 12 )]
+visible = false
+
 [connection signal="focus_entered" from="VBoxContainer/Play" to="." method="set_expanded" binds= [ "VBoxContainer/Play", true ]]
 [connection signal="focus_exited" from="VBoxContainer/Play" to="." method="set_expanded" binds= [ "VBoxContainer/Play", false ]]
 [connection signal="mouse_entered" from="VBoxContainer/Play" to="." method="set_expanded" binds= [ "VBoxContainer/Play", true ]]
 [connection signal="mouse_exited" from="VBoxContainer/Play" to="." method="set_expanded" binds= [ "VBoxContainer/Play", false ]]
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_Play_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Credits" to="." method="set_expanded" binds= [ "VBoxContainer/Credits", true ]]
+[connection signal="mouse_exited" from="VBoxContainer/Credits" to="." method="set_expanded" binds= [ "VBoxContainer/Credits", false ]]
+[connection signal="pressed" from="VBoxContainer/Credits" to="." method="_on_Credits_pressed"]
 [connection signal="focus_entered" from="VBoxContainer/Quit" to="." method="set_expanded" binds= [ "VBoxContainer/Quit", true ]]
 [connection signal="focus_exited" from="VBoxContainer/Quit" to="." method="set_expanded" binds= [ "VBoxContainer/Quit", false ]]
 [connection signal="mouse_entered" from="VBoxContainer/Quit" to="." method="set_expanded" binds= [ "VBoxContainer/Quit", true ]]
