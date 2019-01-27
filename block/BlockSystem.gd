@@ -103,13 +103,13 @@ func collision_y(block: Block, delta : float) -> bool:
 	var shift = Vector2(+ block.size.y - skinwidth, 0)
 	
 	if try_cast(delta, center, block, false):
-		return true
+		return delta >= 0
 		
 	if try_cast(delta, center + shift, block, false):
-		return true
+		return delta >= 0
 		
 	if try_cast(delta, center + 2 * shift, block, false):
-		return true
+		return delta >= 0
 
 	return false
 
