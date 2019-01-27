@@ -72,12 +72,10 @@ func _physics_process(delta):
 		
 		if collision_x(block, delta_pos.x): #block_colliding_horizontally(block):
 			block.cur_velocity.x = 0
-			$Collision.play()
 
 		block.position.y += delta_pos.y
 		if collision_y(block, delta_pos.y):
 			set_block_as_sleeping(block)
-			$Collision.play()
 			
 		
 func collision_x(block: Block, delta : float) -> bool:
