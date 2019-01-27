@@ -61,6 +61,17 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector2(0, -1))
 	
 	if is_on_floor():
+		if $GrabBlockArea.carried_block == null:
+			if velocity.x != 0:
+				$AnimatedSprite.play("walk_" + str(id))
+			else: 
+				$AnimatedSprite.play("jump_" + str(id))
+		else:
+			if velocity.x != 0:
+				$AnimatedSprite.play("walk_grab_" + str(id))
+			else: 
+				$AnimatedSprite.play("idle_grab_" + str(id))
+		
 		velocity.y = 0
 		jump_count = 0
 		airborne = false 
