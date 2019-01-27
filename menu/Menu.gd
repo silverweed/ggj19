@@ -10,7 +10,7 @@ func set_expanded(node_path : String, expand : bool):
 
 
 func _on_Play_pressed():
-	$Ok.play()
+	$VBoxContainer/Play/Ok.play()
 	get_tree().change_scene_to(MAIN_SCENE)
 
 

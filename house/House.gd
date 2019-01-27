@@ -5,7 +5,7 @@ signal player_won(id)
 export var id = 0
 
 const TEXTURES = [
-	preload("res://house/sprites/house_base_01.png"),
+	preload("res://house/sprites/house_evil.png"),
 	preload("res://house/sprites/house_cyclops.png")
 ]
 	

@@ -13,7 +13,7 @@ extents = Vector2( 63, 30 )
 
 [sub_resource type="RectangleShape2D" id=3]
 
-extents = Vector2( 30, 63 )
+extents = Vector2( 51.0984, 79.8539 )
 
 [sub_resource type="Animation" id=4]
 

@@ -1,8 +1,12 @@
 extends Node2D
 
 const MAX_PLAYERS = 2
-const SPAWN_POINT_0 =  Vector2(-600, -2000)
-const SPAWN_POINT_1 = Vector2(1750, -2000)
+
+export (NodePath) var spawn_point_0_path
+export (NodePath) var spawn_point_1_path
+
+onready var spawn_point_0 = get_node(spawn_point_0_path).global_position
+onready var spawn_point_1 = get_node(spawn_point_1_path).global_position
 
 const Player = preload("res://player/Player.gd")
 
@@ -22,12 +26,11 @@ func _process(delta):
 	elif time_to_spawn > -1:
 		for child in self.get_children():
 			if child is Player:
+				child.velocity.y = 0
 				if child.id == 1:
-					child.velocity.y = 0
-					child.global_position = SPAWN_POINT_1
+					child.global_position = spawn_point_1
 				else:
-					child.velocity.y = 0
-					child.global_position = SPAWN_POINT_0
+					child.global_position = spawn_point_0
 		time_to_spawn = -10
 		
 		
@@ -45,10 +48,9 @@ func init_players():
 func on_player_dead (id:int):
 	for child in self.get_children():
 		if child is Player and (child).id == id:
+			child.velocity.y = 0
 			if id == 1:
-				child.velocity.y = 0
-				child.global_position = SPAWN_POINT_1
+				child.global_position = spawn_point_1
 			else:
-				child.velocity.y = 0
-				child.global_position = SPAWN_POINT_0
+				child.global_position = spawn_point_0
 
